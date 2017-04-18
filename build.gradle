@@ -39,7 +39,7 @@ clean.doFirst {
     delete "${projectDir}/web"
     println "${projectDir}/web"
     delete "${projectDir}/test_browser/build"
-    println "${projectDir}/web"
+    println "${projectDir}/test_browser/build"
 }
 
 build.doLast {
@@ -59,6 +59,7 @@ build.doLast {
 
 compileKotlin2Js {
     kotlinOptions.metaInfo = true
+    kotlinOptions.outputFile = "${projectDir}/web/propa.js"
 }
 
 test.doLast {
