@@ -3,6 +3,7 @@ import kotlinx.html.dom.create
 import kotlinx.html.*
 import kotlinx.html.dom.append
 import kotlinx.html.js.*
+import org.w3c.dom.DocumentFragment
 import org.w3c.dom.HTMLTemplateElement
 import org.w3c.dom.get
 import kotlin.browser.document
@@ -25,7 +26,8 @@ fun main(args: Array<String>){
   val clone = document.importNode(template.content, true);
   js("console.log('clone: ', clone)")
 
-
+  val documentFragment: DocumentFragment
+  js("documentFragment = template.content")
   document.body!!.append { template { h1 { +"Template test" } } }
   node[0]?.replaceWith(otherHtml)
 

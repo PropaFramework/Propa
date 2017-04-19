@@ -1,6 +1,7 @@
 package com.gbsol.propa.element
 
 import kotlinx.html.*
+import org.w3c.dom.DocumentFragment
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLTemplateElement
 
@@ -11,30 +12,38 @@ interface HtmlTemplateTag : MetaDataContent, FlowContent, PhrasingContent, HtmlB
 
 @Suppress("unused")
 open class TEMPLATE(initialAttributes : Map<String, String>, override val consumer : TagConsumer<*>) : HTMLTag("template", consumer, initialAttributes, null, false, false), HtmlTemplateTag {
-
-  val asFlowContent: FlowContent
-    get() = this
-
-  val asMetaDataContent: MetaDataContent
-    get() = this
-
-  val asPhrasingContent: PhrasingContent
-    get() = this
+  val content: DocumentFragment
+    get(){
+      val df: DocumentFragment? = null
+      js("df = this.content")
+      return df!!
+    }
 }
 
-fun BODY.template(initalAttributes : Map<String, String> = emptyMap(), block : TEMPLATE.() -> Unit = {}) : HTMLTemplateElement = TEMPLATE(initalAttributes, consumer).visit(block) as HTMLTemplateElement
+val TEMPLATE.asFlowContent: FlowContent
+  get() = this
 
-fun HEAD.template(initalAttributes : Map<String, String> = emptyMap(), block : TEMPLATE.() -> Unit = {}) : HTMLTemplateElement = TEMPLATE(initalAttributes, consumer).visit(block) as HTMLTemplateElement
+val TEMPLATE.asMetaDataContent: MetaDataContent
+  get() = this
 
-fun DL.template(initalAttributes : Map<String, String> = emptyMap(), block : TEMPLATE.() -> Unit = {}) : HTMLTemplateElement = TEMPLATE(initalAttributes, consumer).visit(block) as HTMLTemplateElement
+val TEMPLATE.asPhrasingContent: PhrasingContent
+  get() = this
 
-fun COLGROUP.template(initalAttributes : Map<String, String> = emptyMap(), block : TEMPLATE.() -> Unit = {}) : HTMLTemplateElement {
+fun BODY.template(initalAttributes : Map<String, String> = emptyMap(), block : TEMPLATE.() -> Unit = {}) : Unit = TEMPLATE(initalAttributes, consumer).visit(block)
 
-  if (!this.attributes["span"].isNullOrBlank()) throw Exception("Cannot place a <template> element inside a " +
-      "<colgroup> element that has 'span' as an attribute.")
+fun HEAD.template(initalAttributes : Map<String, String> = emptyMap(), block : TEMPLATE.() -> Unit = {}) : Unit = TEMPLATE(initalAttributes, consumer).visit(block)
 
-  return TEMPLATE(initalAttributes, consumer).visit(block) as HTMLTemplateElement
+fun DL.template(initalAttributes : Map<String, String> = emptyMap(), block : TEMPLATE.() -> Unit = {}) : Unit = TEMPLATE(initalAttributes, consumer).visit(block)
+
+fun COLGROUP.template(initalAttributes : Map<String, String> = emptyMap(), block : TEMPLATE.() -> Unit = {}) : Unit {
+
+  if (this.attributes.containsKey("span") && !this.attributes["span"].isNullOrBlank())
+    throw Exception("Cannot place a <template> element inside a <colgroup> element that has 'span' as an attribute.")
+
+  return TEMPLATE(initalAttributes, consumer).visit(block)
 }
 
 
 fun TagConsumer<HTMLElement>.template(initalAttributes : Map<String, String> = emptyMap(), block : TEMPLATE.() -> Unit = {}) : HTMLTemplateElement = TEMPLATE(initalAttributes, this).visitAndFinalize(this, block) as HTMLTemplateElement
+
+internal object DocumentFragmentEncoder
