@@ -31,9 +31,9 @@ fun main(args: Array<String>){
   document.body!!.append { template { h1 { +"Template test" } } }
   node[0]?.replaceWith(otherHtml)
 
-  val temp = document.getElementsByTagName("template")[0] as HTMLTemplateElement
+//  val temp1 = document.getElementsByTagName("template")[0] as HTMLTemplateElement
 
-  val cl = document.importNode(temp.content, true);
+//  val cl = document.importNode(temp1.content, true);
 
-  document.body!!.appendChild(cl)
+//  document.body!!.appendChild(cl)
 }
