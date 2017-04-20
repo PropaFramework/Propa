@@ -11,18 +11,8 @@ import org.w3c.dom.HTMLTemplateElement
 interface HtmlTemplateTag : MetaDataContent, FlowContent, PhrasingContent, HtmlBlockTag
 
 @Suppress("unused")
-open class TEMPLATE(initialAttributes: Map<String, String>, override var consumer: TagConsumer<*>) : HTMLTag("template", consumer, initialAttributes, null, false, false), HtmlTemplateTag {
-  var content: DocumentFragment
-    get(){
-
-    }
-    private set(content: DocumentFragment){
-      this.content = content
-    }
-
-  init {
-    content = DocumentFragment()
-  }
+open class TEMPLATE(initialAttributes: Map<String, String>, override val consumer: TagConsumer<*>) : HTMLTag("template", consumer, initialAttributes, null, false, false), HtmlTemplateTag {
+  //override visit and visitandfinalize functions to add intermediate content document-fragment to consumer
 }
 
 val TEMPLATE.asFlowContent: FlowContent
