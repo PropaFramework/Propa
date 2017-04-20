@@ -1,18 +1,57 @@
 package com.gbsol.propa.element
 
 import kotlinx.html.*
-import org.w3c.dom.DocumentFragment
-import org.w3c.dom.HTMLElement
-import org.w3c.dom.HTMLTemplateElement
+import kotlinx.html.dom.create
+import kotlinx.html.stream.HTMLStreamBuilder
+import kotlinx.html.stream.createHTML
+import org.w3c.dom.*
+import kotlin.browser.document
 
 /**
  * Created by gbaldeck on 4/17/2017.
  */
-interface HtmlTemplateTag : MetaDataContent, FlowContent, PhrasingContent, HtmlBlockTag
 
 @Suppress("unused")
-open class TEMPLATE(initialAttributes: Map<String, String>, override val consumer: TagConsumer<*>) : HTMLTag("template", consumer, initialAttributes, null, false, false), HtmlTemplateTag {
-  //override visit and visitandfinalize functions to add intermediate content document-fragment to consumer
+open class TEMPLATE(initialAttributes: Map<String, String>, override val consumer: TagConsumer<*>) : HTMLTag("template", consumer, initialAttributes, null, false, false), FlowMetaDataPhrasingContent {
+
+  inline fun <reified R> generateDocFragContent(consumer: TagConsumer<R>, block: Any) {
+
+    console.log("got here")
+    println("got here")
+    println("string is r: "+(String is R))
+    if(String is R)
+      (this as Tag).visit(block as (Tag.() -> Unit))
+    else
+      finalize(consumer as TagConsumer<HTMLElement>, block as (TagConsumer<HTMLElement>.() -> HTMLElement))
+  }
+
+  inline fun <reified R> finalizeDocFrag(consumer: TagConsumer<R>, block: Any?) : R {
+    if (this.consumer !== consumer) {
+      throw IllegalArgumentException("Wrong exception")
+    }
+    val tmp = consumer is HTMLStreamBuilder
+    println("$tmp")
+    println("consumer's class: ${consumer::class.simpleName}")
+    println("R's class: ${R::class.simpleName}")
+    println("${String::class.simpleName}")
+
+    if(block !== null) {
+      if (String is R)
+        return (this as Tag).visitAndFinalize(consumer, block as (Tag.() -> Unit))
+      else
+        return finalize(consumer as TagConsumer<HTMLElement>, block as (TagConsumer<HTMLElement>.() -> HTMLElement)) as R
+    }
+
+    return consumer.finalize()
+  }
+
+  fun finalize(consumer: TagConsumer<HTMLElement>, block: (TagConsumer<HTMLElement>.() -> HTMLElement)) : HTMLElement {
+    this.visit{}
+    val template = consumer.finalize() as HTMLTemplateElement
+    val content = document.create.block()
+    template.content.appendChild(content);
+    return template
+  }
 }
 
 val TEMPLATE.asFlowContent: FlowContent
@@ -24,22 +63,22 @@ val TEMPLATE.asMetaDataContent: MetaDataContent
 val TEMPLATE.asPhrasingContent: PhrasingContent
   get() = this
 
-fun BODY.template(initalAttributes: Map<String, String> = emptyMap(), block: TEMPLATE.() -> Unit = {}): Unit = TEMPLATE(initalAttributes, consumer).visit(block)
+fun FlowMetaDataPhrasingContent.template(classes : String? = null, block: TEMPLATE.() -> Unit = {}): Unit =
+    TEMPLATE(attributesMapOf("class", classes), consumer).generateDocFragContent(consumer, block)
 
-fun HEAD.template(initalAttributes: Map<String, String> = emptyMap(), block: TEMPLATE.() -> Unit = {}): Unit = TEMPLATE(initalAttributes, consumer).visit(block)
-
-fun DL.template(initalAttributes: Map<String, String> = emptyMap(), block: TEMPLATE.() -> Unit = {}): Unit = TEMPLATE(initalAttributes, consumer).visit(block)
-
-fun COLGROUP.template(initalAttributes: Map<String, String> = emptyMap(), block: TEMPLATE.() -> Unit = {}): Unit {
+fun COLGROUP.template(classes : String? = null, block: TEMPLATE.() -> Unit = {}): Unit {
 
   if (this.attributes.containsKey("span") && !this.attributes["span"].isNullOrBlank())
     throw Exception("Cannot place a <template> element inside a <colgroup> element that has 'span' as an attribute.")
 
-  return TEMPLATE(initalAttributes, consumer).visit(block)
+  return TEMPLATE(attributesMapOf("class", classes), consumer).generateDocFragContent(consumer, block)
 }
 
 
-fun TagConsumer<HTMLElement>.template(initalAttributes: Map<String, String> = emptyMap(), block: TEMPLATE.() -> Unit = {}): HTMLTemplateElement {
+fun TagConsumer<HTMLElement>.template(classes : String? = null,
+                                      block: (TagConsumer<HTMLElement>.() -> HTMLElement)? = null): HTMLTemplateElement =
+    TEMPLATE(attributesMapOf("class", classes), this).finalizeDocFrag(this, block) as HTMLTemplateElement
 
-  return TEMPLATE(initalAttributes, this).visitAndFinalize(this, block) as HTMLTemplateElement
-}
+fun TagConsumer<String>.template(classes : String? = null, block : TEMPLATE.() -> Unit = {}) : String =
+    TEMPLATE(attributesMapOf("class", classes), this).finalizeDocFrag(this, block)
+//    DIV(attributesMapOf("class", classes), this).visitAndFinalize(this, block)

@@ -6,35 +6,32 @@
 </head>
 
 <body>
-<template>
-    <h1>test me</h1>
-</template>
 <propa-app></propa-app>
 <script src="./build/kotlin.js"></script>
 <script src="./build/kotlinx-html-js.js"></script>
 <script src="../web/propa.js"></script>
 <script src="./build/propa_test.js"></script>
 
-<script>
-    var temp = document.createElement('template');
-    var h1 = document.createElement('h1');
-    h1.textContent = 'hello';
+<!--<script>-->
+    <!--var temp = document.createElement('template');-->
+    <!--var h1 = document.createElement('h1');-->
+    <!--h1.textContent = 'hello';-->
 
-    var div = document.createElement('div')
-    div.appendChild(h1)
-    temp.appendChild(div)
+    <!--var div = document.createElement('div')-->
+    <!--div.appendChild(h1)-->
+    <!--temp.appendChild(div)-->
 
-    console.log('temp: ', temp)
-    temp.content.appendChild(div)
-    console.log('temp content: ', temp.content)
+    <!--console.log('temp: ', temp)-->
+    <!--temp.content.appendChild(div)-->
+    <!--console.log('temp content: ', temp.content)-->
 
-    var c = document.importNode(temp.content, true)
-    document.body.appendChild(c)
+    <!--var c = document.importNode(temp.content, true)-->
+    <!--document.body.appendChild(c)-->
 
 
-    var temp2 = document.getElementsByTagName('template');
-    console.log('temp2: ', temp2[0])
-    console.log('temp2 content: ', temp2[0].content)
-</script>
+    <!--var temp2 = document.getElementsByTagName('template');-->
+    <!--console.log('temp2: ', temp2[0])-->
+    <!--console.log('temp2 content: ', temp2[0].content)-->
+<!--</script>-->
 </body>
 </html>
