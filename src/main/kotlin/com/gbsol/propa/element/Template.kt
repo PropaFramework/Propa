@@ -1,6 +1,7 @@
 package com.gbsol.propa.element
 
 import kotlinx.html.*
+import kotlinx.html.dom.JSDOMBuilder
 import kotlinx.html.dom.create
 import kotlinx.html.stream.HTMLStreamBuilder
 import kotlinx.html.stream.createHTML
@@ -19,10 +20,10 @@ open class TEMPLATE(initialAttributes: Map<String, String>, override val consume
     console.log("got here")
     println("got here")
     println("string is r: "+(String is R))
-    if(String is R)
-      (this as Tag).visit(block as (Tag.() -> Unit))
-    else
+    if(consumer is JSDOMBuilder)
       finalize(consumer as TagConsumer<HTMLElement>, block as (TagConsumer<HTMLElement>.() -> HTMLElement))
+    else
+      (this as Tag).visit(block as (Tag.() -> Unit))
   }
 
   inline fun <reified R> finalizeDocFrag(consumer: TagConsumer<R>, block: Any?) : R {
@@ -36,12 +37,13 @@ open class TEMPLATE(initialAttributes: Map<String, String>, override val consume
     println("${String::class.simpleName}")
 
     if(block !== null) {
-      if (String is R)
-        return (this as Tag).visitAndFinalize(consumer, block as (Tag.() -> Unit))
-      else
+      if (consumer is JSDOMBuilder)
         return finalize(consumer as TagConsumer<HTMLElement>, block as (TagConsumer<HTMLElement>.() -> HTMLElement)) as R
+      else
+        return (this as Tag).visitAndFinalize(consumer, block as (Tag.() -> Unit))
     }
 
+    this.visit{}
     return consumer.finalize()
   }
 
@@ -49,7 +51,9 @@ open class TEMPLATE(initialAttributes: Map<String, String>, override val consume
     this.visit{}
     val template = consumer.finalize() as HTMLTemplateElement
     val content = document.create.block()
-    template.content.appendChild(content);
+    if(content !== undefined)
+      template.content.appendChild(content);
+
     return template
   }
 }
@@ -63,7 +67,7 @@ val TEMPLATE.asMetaDataContent: MetaDataContent
 val TEMPLATE.asPhrasingContent: PhrasingContent
   get() = this
 
-fun FlowMetaDataPhrasingContent.template(classes : String? = null, block: TEMPLATE.() -> Unit = {}): Unit =
+fun HTMLTag.template(classes : String? = null, block: TEMPLATE.() -> Unit = {}): Unit =
     TEMPLATE(attributesMapOf("class", classes), consumer).generateDocFragContent(consumer, block)
 
 fun COLGROUP.template(classes : String? = null, block: TEMPLATE.() -> Unit = {}): Unit {

@@ -5,6 +5,7 @@ import kotlinx.html.dom.append
 import kotlinx.html.js.*
 import kotlinx.html.stream.createHTML
 import org.w3c.dom.DocumentFragment
+import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLTemplateElement
 import org.w3c.dom.get
 import kotlin.browser.document
@@ -14,10 +15,11 @@ import kotlin.browser.document
  */
 fun main(args: Array<String>){
 
-//  val html = createHTML().template { div { +"hola" } }
-//  println("html: $html")
+  val html = createHTML().template { template {  div { +"hola"; template {  } } } }
+  println("html: $html")
   val template = document.create.template {
-    h1 { +"My template is awesome" }
+    template { h1 { +"hello"; template { +"it worked" }  } }
+
   }
   js("console.log('template: ', template)")
   js("console.log('template content: ', template.content)")
