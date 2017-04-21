@@ -15,17 +15,17 @@ import kotlin.browser.document
  */
 fun main(args: Array<String>){
 
-  val html = createHTML().template { template {  div { +"hola"; template {  } } } }
+  val html = createHTML().template { template {  div { +"hola"; template { +"sup" } } } }
   println("html: $html")
   val template = document.create.template {
-    template { h1 { +"hello"; template { +"it worked" }  } }
+    template { h1 { +"hello"; template {  +"hello"; +"good day" }  } }
 
   }
   js("console.log('template: ', template)")
   js("console.log('template content: ', template.content)")
 
   val clone = document.importNode(template.content, true);
-  clone.firstChild!!.textContent = "actually this is awesome"
+  clone.firstChild!!.textContent = "hello 2"
   js("console.log('clone: ', clone)")
 
   document.body!!.append (clone)

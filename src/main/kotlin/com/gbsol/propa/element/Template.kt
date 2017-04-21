@@ -13,46 +13,45 @@ import kotlin.browser.document
  */
 
 @Suppress("unused")
-open class TEMPLATE(initialAttributes: Map<String, String>, override val consumer: TagConsumer<*>) : HTMLTag("template", consumer, initialAttributes, null, false, false), FlowMetaDataPhrasingContent {
+open class TEMPLATE(initialAttributes: Map<String, String>, override var consumer: TagConsumer<*>) : HTMLTag("template", consumer, initialAttributes, null, false, false), FlowMetaDataPhrasingContent {
 
-  inline fun <reified R> generateDocFragContent(consumer: TagConsumer<R>, block: Any) {
-
-    console.log("got here")
-    println("got here")
-    println("string is r: "+(String is R))
+  fun <R> generateDocFragContent(consumer: TagConsumer<R>, block: TEMPLATE.() -> Unit) {
     if(consumer is JSDOMBuilder)
-      finalize(consumer as TagConsumer<HTMLElement>, block as (TagConsumer<HTMLElement>.() -> HTMLElement))
+      finalize(consumer as TagConsumer<HTMLElement>, block)
     else
-      (this as Tag).visit(block as (Tag.() -> Unit))
+      this.visit(block)
   }
 
-  inline fun <reified R> finalizeDocFrag(consumer: TagConsumer<R>, block: Any?) : R {
+  fun <R> finalizeDocFrag(consumer: TagConsumer<R>, block: TEMPLATE.() -> Unit) : R {
     if (this.consumer !== consumer) {
       throw IllegalArgumentException("Wrong exception")
     }
-    val tmp = consumer is HTMLStreamBuilder
-    println("$tmp")
-    println("consumer's class: ${consumer::class.simpleName}")
-    println("R's class: ${R::class.simpleName}")
-    println("${String::class.simpleName}")
 
     if(block !== null) {
       if (consumer is JSDOMBuilder)
-        return finalize(consumer as TagConsumer<HTMLElement>, block as (TagConsumer<HTMLElement>.() -> HTMLElement)) as R
+        return finalize(consumer as TagConsumer<HTMLElement>, block) as R
       else
-        return (this as Tag).visitAndFinalize(consumer, block as (Tag.() -> Unit))
+        return this.visitAndFinalize(consumer, block)
     }
 
     this.visit{}
     return consumer.finalize()
   }
 
-  fun finalize(consumer: TagConsumer<HTMLElement>, block: (TagConsumer<HTMLElement>.() -> HTMLElement)) : HTMLElement {
+  fun finalize(consumer: TagConsumer<HTMLElement>, block: (TEMPLATE.() -> Unit)) : HTMLElement {
     this.visit{}
     val template = consumer.finalize() as HTMLTemplateElement
-    val content = document.create.block()
-    if(content !== undefined)
-      template.content.appendChild(content);
+    console.log("here")
+    val content = document.create.html(block = (block as HTML.() -> Unit)) as HTMLElement
+
+    console.log("content: ", content)
+    if(content !== undefined) {
+      console.log("nodes: "+content.childNodes)
+      console.log("nodes length: "+content.childNodes.length)
+      content.childNodes.asList().forEach {
+        template.content.append(it)
+      }
+    }
 
     return template
   }
@@ -80,7 +79,7 @@ fun COLGROUP.template(classes : String? = null, block: TEMPLATE.() -> Unit = {})
 
 
 fun TagConsumer<HTMLElement>.template(classes : String? = null,
-                                      block: (TagConsumer<HTMLElement>.() -> HTMLElement)? = null): HTMLTemplateElement =
+                                      block: TEMPLATE.() -> Unit): HTMLTemplateElement =
     TEMPLATE(attributesMapOf("class", classes), this).finalizeDocFrag(this, block) as HTMLTemplateElement
 
 fun TagConsumer<String>.template(classes : String? = null, block : TEMPLATE.() -> Unit = {}) : String =
