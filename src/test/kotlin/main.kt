@@ -15,10 +15,10 @@ import kotlin.browser.document
  */
 fun main(args: Array<String>){
 
-  val html = createHTML().template { template {  div { +"hola"; template { +"sup" } } } }
+  val html = createHTML().template { template("other gold") {  div { +"hola"; template { attributes["a"] = "b"; +"sup" } } } }
   println("html: $html")
-  val template = document.create.template {
-    template { h1 { +"hello"; template {  +"hello"; +"good day" }  } }
+  val template = document.create.template("kind of gold") {
+    template { h1 { +"hello"; template {  attributes["class"] = "testa testb testc"}  } }
 
   }
   js("console.log('template: ', template)")

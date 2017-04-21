@@ -27,30 +27,22 @@ open class TEMPLATE(initialAttributes: Map<String, String>, override var consume
       throw IllegalArgumentException("Wrong exception")
     }
 
-    if(block !== null) {
-      if (consumer is JSDOMBuilder)
-        return finalize(consumer as TagConsumer<HTMLElement>, block) as R
-      else
-        return this.visitAndFinalize(consumer, block)
-    }
+    if (consumer is JSDOMBuilder)
+      return finalize(consumer as TagConsumer<HTMLElement>, block) as R
 
-    this.visit{}
-    return consumer.finalize()
+    return this.visitAndFinalize(consumer, block)
   }
 
   fun finalize(consumer: TagConsumer<HTMLElement>, block: (TEMPLATE.() -> Unit)) : HTMLElement {
     this.visit{}
     val template = consumer.finalize() as HTMLTemplateElement
-    console.log("here")
-    val content = document.create.html(block = (block as HTML.() -> Unit)) as HTMLElement
-
-    console.log("content: ", content)
+    val content = document.create.html(block = (block as HTML.() -> Unit))
     if(content !== undefined) {
-      console.log("nodes: "+content.childNodes)
-      console.log("nodes length: "+content.childNodes.length)
-      content.childNodes.asList().forEach {
-        template.content.append(it)
-      }
+      for(attribute in content.attributes.asList())
+        template.setAttribute(attribute.name, attribute.value)
+
+      for(node in content.childNodes.asList())
+        template.content.append(node)
     }
 
     return template
@@ -79,7 +71,7 @@ fun COLGROUP.template(classes : String? = null, block: TEMPLATE.() -> Unit = {})
 
 
 fun TagConsumer<HTMLElement>.template(classes : String? = null,
-                                      block: TEMPLATE.() -> Unit): HTMLTemplateElement =
+                                      block: TEMPLATE.() -> Unit = {}): HTMLTemplateElement =
     TEMPLATE(attributesMapOf("class", classes), this).finalizeDocFrag(this, block) as HTMLTemplateElement
 
 fun TagConsumer<String>.template(classes : String? = null, block : TEMPLATE.() -> Unit = {}) : String =
