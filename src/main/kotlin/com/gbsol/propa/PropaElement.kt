@@ -12,11 +12,11 @@ import kotlin.browser.document
  */
 abstract class PropaElement {
   protected val templateElement: HTMLElement
-  protected val prototype: Element
+  protected val prototype: HTMLElement
 
   init {
     templateElement = document.create.html(block = template())
-    prototype = js("HTMLElement.prototype")
+    prototype = js("Object.create(HTMLElement.prototype)")
   }
 
   abstract protected fun template(): HTML.() -> Unit

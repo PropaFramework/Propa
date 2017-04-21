@@ -71,6 +71,13 @@ test.doLast {
         include '*.map'
     }
 
+    copy {
+        from "${projectDir}/src/test/js"
+        into "${projectDir}/test_browser/build"
+        include '*.js'
+        include '*.map'
+    }
+
     configurations.compile.each { File file ->
         copy {
             includeEmptyDirs = false
