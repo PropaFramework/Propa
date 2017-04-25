@@ -1,3 +1,4 @@
+import com.gbsol.propa.*
 import com.gbsol.propa.element.template
 import kotlinx.html.dom.create
 import kotlinx.html.*
@@ -14,6 +15,11 @@ import kotlin.browser.document
  * Created by gbaldeck on 4/17/2017.
  */
 fun main(args: Array<String>){
+  val mainComponent = PropaRenderer()
+
+  Propa has the renderer PropaRenderer()
+  Propa kick off with mainComponent
+
 
   val html = createHTML().template { template("other gold") {  div { +"hola"; template { attributes["a"] = "b"; +"sup" } } } }
   println("html: $html")

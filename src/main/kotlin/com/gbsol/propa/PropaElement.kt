@@ -10,7 +10,7 @@ import kotlin.browser.document
 /**
  * Created by gbaldeck on 4/21/2017.
  */
-abstract class PropaElement {
+abstract class PropaElement: PropaEntity {
   protected val templateElement: HTMLElement
   protected val prototype: HTMLElement
 
