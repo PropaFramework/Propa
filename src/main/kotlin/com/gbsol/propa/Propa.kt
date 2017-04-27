@@ -1,5 +1,11 @@
 package com.gbsol.propa
 
+import kotlinx.html.TagConsumer
+import kotlinx.html.dom.create
+import org.w3c.dom.HTMLElement
+import kotlin.browser.document
+import kotlin.reflect.KClass
+
 /**
  * Created by gbaldeck on 4/17/2017.
  */
@@ -12,29 +18,28 @@ interface PropaEntity
 //object renderer: PropaEntityType()
 //
 //object component: PropaEntityType()
+annotation class Blue
 
 object the
-object off
 
 object theWrapper{
-  infix fun renderer(entity: PropaRenderer){
-    Propa.renderer = entity
-  }
-}
-
-object offWrapper{
-  infix fun with(entity: PropaRenderer) {
+  infix fun renderer(entity: KClass<TagConsumer<*>>){
     Propa.renderer = entity
   }
 }
 
 
 object Propa{
-  var renderer: PropaRenderer? = null
+  var renderer: KClass<out TagConsumer<*>> = document.create::class
 
   infix fun has(t: the) = theWrapper
-  infix fun kick(o: off) = offWrapper
 
+}
+
+internal object PropaRendererFactory{
+
+  val render
+      get() = Propa.renderer::class.createInstance()
 }
 
 

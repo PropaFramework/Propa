@@ -10,6 +10,7 @@ import kotlin.browser.document
 /**
  * Created by gbaldeck on 4/21/2017.
  */
+@Blue
 abstract class PropaElement: PropaEntity {
   protected val templateElement: HTMLElement
   protected val prototype: HTMLElement
@@ -20,4 +21,11 @@ abstract class PropaElement: PropaEntity {
   }
 
   abstract protected fun template(): HTML.() -> Unit
+}
+
+class MyElement : PropaElement(){
+  override fun template(): HTML.() -> Unit {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
 }

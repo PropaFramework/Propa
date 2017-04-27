@@ -8,6 +8,7 @@ import kotlinx.html.stream.createHTML
 import org.w3c.dom.DocumentFragment
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLTemplateElement
+import org.w3c.dom.events.Event
 import org.w3c.dom.get
 import kotlin.browser.document
 
@@ -15,10 +16,14 @@ import kotlin.browser.document
  * Created by gbaldeck on 4/17/2017.
  */
 fun main(args: Array<String>){
-  val mainComponent = PropaRenderer()
 
-  Propa has the renderer PropaRenderer()
-  Propa kick off with mainComponent
+  console.log("has class true: ", MyElement::class.extendsOrImplements(PropaElement::class))
+  console.log("has class false: ", PropaElement::class.extendsOrImplements(MyElement::class))
+  console.log("has class false: ", PropaElement::class.extendsOrImplements(PropaElement::class))
+  console.log("has class true: ", PropaElement::class.extendsOrImplements(PropaEntity::class))
+  console.log("has class false: ", PropaEntity::class.extendsOrImplements(PropaElement::class))
+
+//  Propa has the renderer MyRenderer::class
 
 
   val html = createHTML().template { template("other gold") {  div { +"hola"; template { attributes["a"] = "b"; +"sup" } } } }
@@ -36,4 +41,38 @@ fun main(args: Array<String>){
 
   document.body!!.append (clone)
 
+}
+
+class MyRenderer: TagConsumer<HTMLElement> {
+  override fun finalize(): HTMLElement {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun onTagAttributeChange(tag: Tag, attribute: String, value: String?) {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun onTagContent(content: CharSequence) {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun onTagContentEntity(entity: Entities) {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun onTagContentUnsafe(block: Unsafe.() -> Unit) {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun onTagEnd(tag: Tag) {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun onTagEvent(tag: Tag, event: String, value: (Event) -> Unit) {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun onTagStart(tag: Tag) {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
 }
