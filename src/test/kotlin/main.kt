@@ -11,6 +11,7 @@ import org.w3c.dom.HTMLTemplateElement
 import org.w3c.dom.events.Event
 import org.w3c.dom.get
 import kotlin.browser.document
+import kotlin.browser.window
 
 /**
  * Created by gbaldeck on 4/17/2017.
@@ -40,6 +41,8 @@ fun main(args: Array<String>){
   js("console.log('clone: ', clone)")
 
   document.body!!.append (clone)
+
+  window.customElements.define("my-custom-element", MyWebComponent::class.js)
 
 }
 

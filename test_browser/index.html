@@ -6,6 +6,13 @@
 </head>
 
 <body>
+<script>
+    class PropaElementTest extends HTMLElement {
+        constructor() {
+            super();
+        }
+    }
+</script>
 
 <template class="gold large">
 
@@ -15,7 +22,7 @@
 <script src="../web/propa.js"></script>
 <script src="./build/propa_test.js"></script>
 <script src="./build/test.js"></script>
-
+<my-custom-element></my-custom-element>
 <!--<script>-->
     <!--var temp = document.createElement('template');-->
     <!--var h1 = document.createElement('h1');-->
