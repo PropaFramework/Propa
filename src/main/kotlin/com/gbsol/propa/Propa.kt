@@ -18,28 +18,41 @@ interface PropaEntity
 //object renderer: PropaEntityType()
 //
 //object component: PropaEntityType()
-annotation class Blue
 
 object the
 
-object theWrapper{
-  infix fun renderer(entity: KClass<TagConsumer<*>>){
+object theWrapper {
+  infix fun renderer(entity: KClass<TagConsumer<*>>) {
     Propa.renderer = entity
   }
 }
 
 
-object Propa{
-  var renderer: KClass<out TagConsumer<*>> = document.create::class
-
+object Propa {
   infix fun has(t: the) = theWrapper
 
+  private val components: MutableList<PropaComponent> = mutableListOf()
+  private var entryComponent: PropaComponent? = null
+
+  fun registerComponent(component: PropaComponent) = {
+
+    components.add(component)
+  }
+
+  fun registerEntryComponent(component: PropaComponent) {
+    if (entryComponent == null) {
+      entryComponent = component
+    } else {
+
+    }
+  }
+
+  var renderer: KClass<out TagConsumer<*>> = document.create::class
 }
 
-internal object PropaRendererFactory{
-
+internal object PropaRendererFactory {
   val render
-      get() = Propa.renderer::class.createInstance()
+    get() = Propa.renderer::class.createInstance()
 }
 
 
