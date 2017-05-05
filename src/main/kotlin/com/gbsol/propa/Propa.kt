@@ -23,7 +23,7 @@ object the
 
 object theWrapper {
   infix fun renderer(entity: KClass<TagConsumer<*>>) {
-    Propa.renderer = entity
+//    Propa.renderer = entity
   }
 }
 
@@ -47,12 +47,8 @@ object Propa {
     }
   }
 
-  var renderer: KClass<out TagConsumer<*>> = document.create::class
-}
-
-internal object PropaRendererFactory {
-  val render
-    get() = Propa.renderer::class.createInstance()
+  var renderer: PropaRenderer<*> = document.create
 }
 
 
+typealias PropaRenderer<T> = TagConsumer<T>
