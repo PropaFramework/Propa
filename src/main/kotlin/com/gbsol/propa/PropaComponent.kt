@@ -1,27 +1,21 @@
 package com.gbsol.propa
 
 import kotlinx.html.BODY
-import kotlinx.html.HTMLTag
-import org.w3c.dom.HTMLElement
+import kotlinx.html.Tag
 
 /**
  * Created by gbaldeck on 4/21/2017.
  */
 interface PropaComponent {
-  companion object
   fun template(): PropaTemplate
-  fun render() = "Im good"
-
 }
 
-interface PropaComponentRenderer<T>
-
-//interface PropaTemplate: Tag{
-//  operator fun invoke()
-//}
-
-internal inline operator fun <reified T> PropaComponentRenderer<T>.invoke(body: PropaTemplate) {
-//  Propa.renderer.
-}
+interface PropaComponentRenderer<T: PropaComponent>
 
 typealias PropaTemplate = BODY.() -> Unit
+
+inline operator fun <reified T: PropaComponent> PropaComponentRenderer<T>.invoke(noinline block: T.() -> Unit = {}) {
+  val component = T::class.createInstance()
+  component.block()
+  Propa.renderer.provideBlockToCurrentTag(component.template() as Tag.() -> Unit)
+}

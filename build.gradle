@@ -61,7 +61,7 @@ compileKotlin2Js {
     kotlinOptions.metaInfo = true
     kotlinOptions.outputFile = "${projectDir}/build/js/propa.js"
     kotlinOptions.sourceMap = true
-    kotlinOptions.moduleKind = 'commonjs'
+//    kotlinOptions.moduleKind = 'commonjs'
 }
 
 test.doLast {
