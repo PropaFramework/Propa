@@ -13,6 +13,17 @@ abstract class PropaComponent {
   var tagName: String = ""
   protected set
 
+  var id:String? = null
+  protected set
+
+  var classes: String? = null
+  protected set
+
+  var style: String? = null
+  protected set
+
+  val extraAttributes: Map<String, String> = mutableMapOf()
+
   abstract fun template(): PropaTemplate
 }
 
@@ -30,8 +41,20 @@ interface PropaComponentRenderer<T: PropaComponent>
 inline operator fun <reified T: PropaComponent> PropaComponentRenderer<T>.invoke(noinline block: T.() -> Unit = {}) {
   val component = this.createInstance()
   component.block()
-  Propa.renderer.insertPropaComponent(component)
+  Propa.renderer.insertPropaComponent(component, component.getAttributes())
 }
 
 inline fun <reified T: PropaComponent> PropaComponentRenderer<T>.createInstance() =
     T::class.createInstance()
+
+fun PropaComponent.getAttributes(): Map<String, String> {
+  val attributes = linkedMapOf<String, String>()
+
+  this.id?.let { attributes["id"] = it }
+  this.classes?.let { attributes["class"] = it }
+  this.style?.let { attributes["style"] = it }
+
+  this.extraAttributes.forEach { (key, value) -> attributes[key] = value }
+
+  return attributes
+}

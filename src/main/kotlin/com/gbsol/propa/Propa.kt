@@ -12,7 +12,8 @@ object Propa {
   val renderer = PropaDomBuilder<HTMLElement>(document)
 
   inline fun<reified T: PropaComponent> entryComponent(component: PropaComponentRenderer<T>){
-    val propaTree = Propa.renderer.startPropa(component.createInstance())
+    val componentInstance = component.createInstance()
+    val propaTree = Propa.renderer.startPropa(componentInstance, componentInstance.getAttributes())
 
     try {
       document.body!!.append(propaTree)

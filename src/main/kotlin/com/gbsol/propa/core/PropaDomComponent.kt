@@ -8,4 +8,5 @@ import kotlinx.html.attributesMapOf
 /**
  * Created by gbaldeck on 5/7/2017.
  */
-open class PROPACOMPONENT(tagName: String, override val consumer : TagConsumer<*>) : HTMLTag(tagName, consumer, attributesMapOf(), null, false, false), HtmlBlockTag
+open class PROPACOMPONENT(tagName: String, initialAttributes : Map<String, String>, override val consumer : TagConsumer<*>)
+  : HTMLTag(tagName, consumer, initialAttributes, null, false, false), HtmlBlockTag
