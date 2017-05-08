@@ -4,14 +4,17 @@ version '0.1.0'
 buildscript {
     ext.kotlin_version = "1.1.2"
     ext.kotlinx_html_version = "0.6.3"
+    ext.kotlin_frontend_plugin = "0.0.19"
 
     repositories {
         maven { url = 'https://dl.bintray.com/kotlin/kotlin-eap-1.1' }
+        maven { url = 'https://dl.bintray.com/kotlin/kotlin-eap' }
         mavenCentral()
         jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:$kotlin_frontend_plugin"
     }
 
 
@@ -19,9 +22,11 @@ buildscript {
 }
 
 apply plugin: 'kotlin2js'
+apply plugin: 'org.jetbrains.kotlin.frontend'
 
 sourceSets {
     main.kotlin.srcDirs += 'src/main/kotlin'
+    main.kotlin.srcDirs += 'src/test/kotlin' //remove from sourceDirs when building to distribute the library
 }
 
 repositories {
@@ -35,25 +40,18 @@ dependencies {
     compile "org.jetbrains.kotlinx:kotlinx-html-js:${kotlinx_html_version}"
 }
 
-clean.doFirst {
-    delete "${projectDir}/web"
-    println "${projectDir}/web"
-    delete "${projectDir}/test_browser/build"
-    println "${projectDir}/test_browser/build"
-}
+kotlinFrontend {
+//    sourceMaps = true
+    npm {
+        dependency("core-js")
+    }
 
-build.doLast {
-    configurations.compile.each { File file ->
-        copy {
-            includeEmptyDirs = false
-
-            from zipTree(file.absolutePath)
-            into "${projectDir}/build/js"
-            include { fileTreeElement ->
-                def path = fileTreeElement.path
-                path.endsWith(".js") && (path.startsWith("META-INF/resources/") || !path.startsWith("META-INF/"))
-            }
-        }
+    webpackBundle {
+        bundleName = "main"
+        contentPath = file('src/test/web')
+        port = 9002
+//        publicPath = "/frontend/"
+//        proxyUrl = "http://localhost:9090"
     }
 }
 
@@ -61,36 +59,7 @@ compileKotlin2Js {
     kotlinOptions.metaInfo = true
     kotlinOptions.outputFile = "${projectDir}/build/js/propa.js"
     kotlinOptions.sourceMap = true
-//    kotlinOptions.moduleKind = 'commonjs'
-}
-
-test.doLast {
-    copy {
-        from "${projectDir}/build/classes/test"
-        into "${projectDir}/test_browser/build"
-        include '*.js'
-        include '*.map'
-    }
-
-    copy {
-        from "${projectDir}/src/test/js"
-        into "${projectDir}/test_browser/build"
-        include '*.js'
-        include '*.map'
-    }
-
-    configurations.compile.each { File file ->
-        copy {
-            includeEmptyDirs = false
-
-            from zipTree(file.absolutePath)
-            into "${projectDir}/test_browser/build"
-            include { fileTreeElement ->
-                def path = fileTreeElement.path
-                path.endsWith(".js") && (path.startsWith("META-INF/resources/") || !path.startsWith("META-INF/"))
-            }
-        }
-    }
+    kotlinOptions.moduleKind = 'commonjs'
 }
 
 task deployToGTMobile(dependsOn: ['clean', 'build']) {
@@ -105,8 +74,17 @@ task deployToGTMobile(dependsOn: ['clean', 'build']) {
 
 build.shouldRunAfter clean
 
-//compileKotlin2Js {
-//    kotlinOptions.outputFile = "${projectDir}/web/output.js"
-////    kotlinOptions.moduleKind = "commonjs"
-//    kotlinOptions.sourceMap = true
+//build.doLast {
+//    configurations.compile.each { File file ->
+//        copy {
+//            includeEmptyDirs = false
+//
+//            from zipTree(file.absolutePath)
+//            into "${projectDir}/build/js"
+//            include { fileTreeElement ->
+//                def path = fileTreeElement.path
+//                path.endsWith(".js") && (path.startsWith("META-INF/resources/") || !path.startsWith("META-INF/"))
+//            }
+//        }
+//    }
 //}

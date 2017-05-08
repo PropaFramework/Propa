@@ -3,9 +3,9 @@ package com.gbsol.propa.element
 import kotlinx.html.*
 import kotlinx.html.dom.JSDOMBuilder
 import kotlinx.html.dom.create
-import kotlinx.html.stream.HTMLStreamBuilder
-import kotlinx.html.stream.createHTML
-import org.w3c.dom.*
+import org.w3c.dom.HTMLElement
+import org.w3c.dom.HTMLTemplateElement
+import org.w3c.dom.asList
 import kotlin.browser.document
 
 /**

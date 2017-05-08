@@ -1,4 +1,4 @@
-package com.gbsol.propa
+package com.gbsol.propa.common
 
 import kotlin.reflect.KClass
 

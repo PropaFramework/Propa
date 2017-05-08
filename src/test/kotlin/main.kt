@@ -1,10 +1,5 @@
 import com.gbsol.propa.*
-import com.gbsol.propa.invoke
-import kotlinx.html.body
-import kotlinx.html.div
-import kotlinx.html.dom.create
-import kotlin.browser.document
-import kotlin.reflect.KClass
+import kotlinx.html.HtmlBlockTag
 
 /**
  * Created by gbaldeck on 4/17/2017.
@@ -18,5 +13,4 @@ fun main(args: Array<String>){
 //  console.log("has class false: ", PropaEntity::class.extendsOrImplements(PropaElement::class))
 
   Propa start with component OtherTestComponent
-
 }

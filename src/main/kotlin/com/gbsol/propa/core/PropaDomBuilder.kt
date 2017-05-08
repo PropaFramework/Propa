@@ -1,4 +1,4 @@
-package com.gbsol.propa
+package com.gbsol.propa.core
 
 import kotlinx.html.*
 import org.w3c.dom.Document
@@ -17,7 +17,12 @@ class PropaDomBuilder<out R : HTMLElement>(val document : Document) : TagConsume
   private var lastLeaved : HTMLElement? = null
   private var currentTag: Tag? = null
 
-  fun provideBlockToCurrentTag(block: Tag.() -> Unit) = currentTag!!.block()
+  fun insertPropaComponent(component: PropaComponent) =
+      PROPACOMPONENT(component.getComponentTagName(), this).visit(component.template())
+
+  fun startPropa(component: PropaComponent) =
+      PROPACOMPONENT(component.getComponentTagName(), this).visitAndFinalize(this,
+          component.template())
 
   override fun onTagStart(tag: Tag) {
     currentTag = tag
@@ -83,7 +88,7 @@ class PropaDomBuilder<out R : HTMLElement>(val document : Document) : TagConsume
     // stupid hack as browsers doesn't support createEntityReference
     val s = document.createElement("span") as HTMLElement
     s.innerHTML = entity.text
-    path.last().appendChild(s.childNodes.asList().filter { it.nodeType == Node.TEXT_NODE }.first())
+    path.last().appendChild(s.childNodes.asList().filter { it.nodeType == Node.Companion.TEXT_NODE }.first())
 
     // other solution would be
 //        pathLast().innerHTML += entity.text
