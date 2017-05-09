@@ -6,7 +6,6 @@ import com.gbsol.propa.common.createInstance
 import com.gbsol.propa.common.isProperTagName
 import kotlinx.html.HtmlBlockTag
 import org.w3c.dom.Element
-import org.w3c.dom.get
 import kotlin.browser.document
 
 /**
@@ -28,7 +27,7 @@ abstract class PropaComponent {
 
   val element: Element
     get() {
-      var target: Element? = document.getElementsByClassName(propaId)[0]
+      var target: Element? = document.querySelector("[$propaId]")
 
       return target ?: throwPropaException("Element '${getComponentTagName()}' with propa-id '$propaId' was not found.")
     }
@@ -77,10 +76,29 @@ inline fun <reified T: PropaComponent> PropaComponentRenderer<T>.createInstance(
 fun PropaComponent.getAttributes(): Map<String, String> {
   val attributes = linkedMapOf<String, String>()
 
-  this.classes?.let { attributes["class"] = it.trim()+" "+propaId } ?: attributes.put("class", propaId)
+  attributes.put(propaId, "")
+  this.classes?.let { attributes["class"] = it.trim() }
   this.style?.let { attributes["style"] = it.trim() }
 
   this.extraAttributes.forEach { (key, value) -> attributes[key.trim()] = value.trim() }
 
   return attributes
 }
+
+val PropaComponent.generatedCss: String?
+  get() {
+    val css = this.style?.replace(Regex("([^{}\\s,+>~]+\\s*)(?:([,+>~])|(\\s*[^{}\\s,+>~]+\\s*))*({)"), {
+      result ->
+      var finalStr = ""
+      var selectors = ",>+~{"
+      for(group in result.groupValues){
+        if(group.trim() == "" || selectors.contains(group.trim())){
+          finalStr += group
+        } else {
+          finalStr += "$group[$propaId]"
+        }
+      }
+      finalStr
+    })
+    return css
+  }
