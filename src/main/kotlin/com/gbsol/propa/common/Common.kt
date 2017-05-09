@@ -18,4 +18,4 @@ fun String.isProperTagName(): String =
   if (this.indexOf("-") > 0)
     this.toLowerCase()
   else
-    throwPropaException("The chosen element name '$this' is not in the correct custom element format.")
+    throwPropaException("The chosen xhtml name '$this' is not in the correct custom xhtml format.")

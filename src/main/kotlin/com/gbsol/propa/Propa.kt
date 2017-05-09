@@ -1,8 +1,9 @@
 package com.gbsol.propa
 
 import com.gbsol.propa.core.*
-import kotlinx.html.body
+import com.gbsol.propa.xhtml.removeAllChildren
 import org.w3c.dom.HTMLElement
+import org.w3c.dom.get
 import kotlin.browser.document
 
 /**
@@ -10,17 +11,31 @@ import kotlin.browser.document
  */
 object Propa {
   val renderer = PropaDomBuilder<HTMLElement>(document)
+  val componentMap = mutableMapOf<String, PropaComponent>()
+
+  fun addComponent(component: PropaComponent){
+    componentMap[component.propaId] = component
+  }
 
   inline fun<reified T: PropaComponent> entryComponent(component: PropaComponentRenderer<T>){
     val componentInstance = component.createInstance()
-    val propaTree = Propa.renderer.startPropa(componentInstance, componentInstance.getAttributes())
+    val propaTree = Propa.renderer.startPropa(componentInstance)
 
     try {
-      document.body!!.append(propaTree)
+      val propaApp = document.getElementsByTagName("propa-app")
+      with(propaApp[0]!!) {
+        removeAllChildren()
+        append(propaTree)
+      }
     } catch (e: Exception){
-      throwPropaException("No body element defined.")
+      throwPropaException("No propa-app element defined.")
     }
 
+    componentMap.forEach {
+      (k, v) ->
+      console.log(v.getComponentTagName()+": "+k)
+      console.log(v.element)
+    }
   }
 
   infix fun start(w: with) = withWrapper

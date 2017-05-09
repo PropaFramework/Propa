@@ -1,4 +1,4 @@
-package com.gbsol.propa.element
+package com.gbsol.propa.xhtml
 
 import kotlinx.html.*
 import kotlinx.html.dom.JSDOMBuilder
