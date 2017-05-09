@@ -15,13 +15,11 @@ abstract class PropaComponent {
   val propaId: String = generatePropaId()
 
   var tagName: String = "" //the get() of this should only be used in getComponentTagName()
-  protected set
+    protected set
 
   var classes: String? = null
-  protected set
 
   var style: String? = null
-  protected set
 
   val extraAttributes: Map<String, String> = mutableMapOf()
 
@@ -35,14 +33,14 @@ abstract class PropaComponent {
   private fun generatePropaId(): String {
     var text: String
 
-    do{
+    do {
       text = "propa-"
       val possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
       for (i in 0..8)
         js("text += possible.charAt(Math.floor(Math.random() * possible.length))")
 
-    }while(Propa.componentMap.containsKey(text))
+    } while (Propa.componentMap.containsKey(text))
 
     return text;
   }
@@ -59,15 +57,15 @@ fun PropaComponent.getComponentTagName(): String =
 
 typealias PropaTemplate = HtmlBlockTag.() -> Unit
 
-interface PropaComponentRenderer<T: PropaComponent>
+interface PropaComponentRenderer<T : PropaComponent>
 
-inline operator fun <reified T: PropaComponent> PropaComponentRenderer<T>.invoke(noinline block: T.() -> Unit = {}) {
+inline operator fun <reified T : PropaComponent> PropaComponentRenderer<T>.invoke(noinline block: T.() -> Unit = {}) {
   val component = this.createInstance()
   component.block()
   Propa.renderer.insertPropaComponent(component)
 }
 
-inline fun <reified T: PropaComponent> PropaComponentRenderer<T>.createInstance(): T {
+inline fun <reified T : PropaComponent> PropaComponentRenderer<T>.createInstance(): T {
   val component = T::class.createInstance()
   Propa.addComponent(component)
   return component
@@ -91,8 +89,8 @@ val PropaComponent.generatedCss: String?
       result ->
       var finalStr = ""
       var selectors = ",>+~{"
-      for(group in result.groupValues){
-        if(group.trim() == "" || selectors.contains(group.trim())){
+      for (group in result.groupValues) {
+        if (group.trim() == "" || selectors.contains(group.trim())) {
           finalStr += group
         } else {
           finalStr += "$group[$propaId]"
