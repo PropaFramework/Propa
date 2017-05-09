@@ -85,7 +85,7 @@ fun PropaComponent.getAttributes(): Map<String, String> {
 
 val PropaComponent.generatedCss: String?
   get() {
-    val css = this.style?.replace(Regex("([^{}\\s,+>~]+\\s*)(?:([,+>~])|(\\s*[^{}\\s,+>~]+\\s*))*({)"), {
+    val css = this.style?.replace(Regex("(?:([^{}\\s,+>~]+)(\\s*))(?:([,+>~])|(?:(\\s*)([^{}\\s,+>~]+)(\\s*)))*({)"), {
       result ->
       var finalStr = ""
       var selectors = ",>+~{"
