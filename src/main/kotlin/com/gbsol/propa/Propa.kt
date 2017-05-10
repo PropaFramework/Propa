@@ -10,31 +10,20 @@ import kotlin.browser.document
  * Created by gbaldeck on 4/17/2017.
  */
 object Propa {
-  val renderer = PropaDomBuilder<HTMLElement>(document)
-  val componentMap = mutableMapOf<String, PropaComponent>()
 
-  fun addComponent(component: PropaComponent){
-    componentMap[component.propaId] = component
-  }
 
   inline fun<reified T: PropaComponent> entryComponent(component: PropaComponentRenderer<T>){
     val componentInstance = component.createInstance()
-    val propaTree = Propa.renderer.startPropa(componentInstance)
+    val propaDom = PropaComponentManager.renderer.startPropa(componentInstance)
 
     try {
       val propaApp = document.getElementsByTagName("propa-app")
       with(propaApp[0]!!) {
         removeAllChildren()
-        append(propaTree)
+        append(propaDom)
       }
     } catch (e: Exception){
       throwPropaException("No propa-app element defined.")
-    }
-
-    componentMap.forEach {
-      (k, v) ->
-      console.log(v.getComponentTagName()+": "+k)
-      console.log(v.element)
     }
   }
 

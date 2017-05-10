@@ -12,16 +12,23 @@ import kotlin.browser.document
  * Created by gbaldeck on 4/21/2017.
  */
 abstract class PropaComponent {
-  val propaId: String = generatePropaId()
+  val propaId: String = PropaComponentManager.generatePropaId()
+  var treeNode: PropaComponentTreeNode? = null
+    get() {
+      if(field == null)
+        throwPropaException("The component '${getComponentTagName()}' has no corresponding tree node.")
 
-  var tagName: String = "" //the get() of this should only be used in getComponentTagName()
+      return field
+    }
+
+  open var tagName: String = "" //the get() of this should only be used in getComponentTagName()
     protected set
 
-  var classes: String? = null
+  open var classes: String? = null
 
-  var style: String? = null
+  open var style: String? = null
 
-  val extraAttributes: Map<String, String> = mutableMapOf()
+  open val extraAttributes: Map<String, String> = mutableMapOf()
 
   val element: Element
     get() {
@@ -29,21 +36,6 @@ abstract class PropaComponent {
 
       return target ?: throwPropaException("Element '${getComponentTagName()}' with propa-id '$propaId' was not found.")
     }
-
-  private fun generatePropaId(): String {
-    var text: String
-
-    do {
-      text = "propa-"
-      val possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-
-      for (i in 0..8)
-        js("text += possible.charAt(Math.floor(Math.random() * possible.length))")
-
-    } while (Propa.componentMap.containsKey(text))
-
-    return text;
-  }
 
   abstract fun template(): PropaTemplate
 }
@@ -62,22 +54,18 @@ interface PropaComponentRenderer<T : PropaComponent>
 inline operator fun <reified T : PropaComponent> PropaComponentRenderer<T>.invoke(noinline block: T.() -> Unit = {}) {
   val component = this.createInstance()
   component.block()
-  Propa.renderer.insertPropaComponent(component)
+  PropaComponentManager.renderer.insertPropaComponent(component)
 }
 
 inline fun <reified T : PropaComponent> PropaComponentRenderer<T>.createInstance(): T {
   val component = T::class.createInstance()
-  Propa.addComponent(component)
   return component
 }
 
 fun PropaComponent.getAttributes(): Map<String, String> {
   val attributes = linkedMapOf<String, String>()
 
-  attributes.put(propaId, "")
   this.classes?.let { attributes["class"] = it.trim() }
-  this.style?.let { attributes["style"] = it.trim() }
-
   this.extraAttributes.forEach { (key, value) -> attributes[key.trim()] = value.trim() }
 
   return attributes
@@ -85,18 +73,31 @@ fun PropaComponent.getAttributes(): Map<String, String> {
 
 val PropaComponent.generatedCss: String?
   get() {
-    val css = this.style?.replace(Regex("(?:([^{}\\s,+>~]+)(\\s*))(?:([,+>~])|(?:(\\s*)([^{}\\s,+>~]+)(\\s*)))*({)"), {
+    val css = this.style?.replace(CssRegex(), {
       result ->
       var finalStr = ""
       var selectors = ",>+~{"
-      for (group in result.groupValues) {
+//      console.log("START GROUPS----------")
+      for (i in 1..result.groupValues.size) {
+        val group = result.groupValues[i]
+//        console.log(group)
         if (group.trim() == "" || selectors.contains(group.trim())) {
           finalStr += group
         } else {
-          finalStr += "$group[$propaId]"
+          finalStr += "$group"
+          treeNode?.path?.forEach {
+            finalStr += "[$it]"
+          }
+
         }
       }
+//      console.log("END GROUPS----------")
       finalStr
     })
     return css
   }
+
+object CssRegex{
+  private val regex = Regex("(?:([^{}\\s,+>~]+)(\\s*))(?:([,+>~])|(?:(\\s*)([^{}\\s,+>~]+)(\\s*)))*({)")
+  operator fun invoke() = regex
+}

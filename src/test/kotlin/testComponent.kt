@@ -11,6 +11,19 @@ class TestComponent: PropaComponent() {
   
   val jsConstructor = this::class.js
 
+  override var classes: String? = "red"
+
+  override var style: String? = """
+  .test {
+    color: blue;
+  }
+
+  .test .red {
+    color: red
+  }
+
+  """
+
   override fun template(): PropaTemplate =  {
     console.log("js constructor: ", jsConstructor)
     div {
