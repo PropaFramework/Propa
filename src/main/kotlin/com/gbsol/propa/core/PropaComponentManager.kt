@@ -9,7 +9,9 @@ import kotlin.browser.document
 object PropaComponentManager{
   val renderer = PropaDomBuilder<HTMLElement>(document)
   val tree = PropaComponentTree()
-  val componentMap = mutableMapOf<String, PropaComponent>()
+  val map = mutableMapOf<String, PropaComponent>()
+
+  var componentsInheritStyle = false
 
   fun generatePropaId(): String {
     var text: String
@@ -21,7 +23,7 @@ object PropaComponentManager{
       for (i in 0..4)
         js("text += possible.charAt(Math.floor(Math.random() * possible.length))")
 
-    } while (componentMap.contains(text))
+    } while (map.contains(text))
 
     return text;
   }

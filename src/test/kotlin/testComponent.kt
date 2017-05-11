@@ -1,4 +1,5 @@
 import com.gbsol.propa.core.*
+import com.gbsol.propa.external.require
 import kotlinx.html.div
 
 /**
@@ -13,19 +14,7 @@ class TestComponent: PropaComponent() {
 
   override var classes: String? = "red"
 
-  override var style: String? = """
-  .test {
-    color: blue;
-  }
-
-  .test .red {
-    color: red
-  }
-
-  """
-
   override fun template(): PropaTemplate =  {
-    console.log("js constructor: ", jsConstructor)
     div {
       +"Hells to the yeah"
     }
@@ -36,10 +25,13 @@ class TestComponent: PropaComponent() {
 class OtherTestComponent: PropaComponent() {
   companion object: PropaComponentRenderer<OtherTestComponent>
 
+  override var style: String? = require("resources/styles/test.css")
+
   override fun template(): PropaTemplate =  {
-      TestComponent{}
+      TestComponent{ classes = "test"; inheritStyle = true}
       TestComponent {
         setMe = "Other test component"
+        inheritStyle = true
       }
   }
 

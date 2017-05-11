@@ -11,6 +11,7 @@ import kotlin.browser.document
  */
 object Propa {
 
+  //todo: Make a function that sets the PropaComponentManager.componentsInheritStyle property
 
   inline fun<reified T: PropaComponent> entryComponent(component: PropaComponentRenderer<T>){
     val componentInstance = component.createInstance()

@@ -27,6 +27,9 @@ apply plugin: 'org.jetbrains.kotlin.frontend'
 sourceSets {
     main.kotlin.srcDirs += 'src/main/kotlin'
     main.kotlin.srcDirs += 'src/test/kotlin' //remove from sourceDirs when building to distribute the library
+    main.resources.srcDirs += "src/main/resources"
+    main.resources.srcDirs += "src/test/resources" //remove from sourceDirs when building to distribute the library
+    main.output.resourcesDir = "build/js/resources"
 }
 
 repositories {
@@ -44,6 +47,12 @@ kotlinFrontend {
 //    sourceMaps = true
     npm {
         dependency("core-js")
+
+        devDependency("css-loader")
+        devDependency("style-loader")
+        devDependency("to-string-loader")
+        devDependency("file-loader")
+        devDependency("karma")
     }
 
     webpackBundle {

@@ -5,6 +5,7 @@ import com.gbsol.propa.common.camelToDashCase
 import com.gbsol.propa.common.createInstance
 import com.gbsol.propa.common.isProperTagName
 import kotlinx.html.HtmlBlockTag
+import kotlinx.html.impl.DelegatingMap
 import org.w3c.dom.Element
 import kotlin.browser.document
 
@@ -21,12 +22,16 @@ abstract class PropaComponent {
       return field
     }
 
+  var styleCompiled: String? = null
+
   open var tagName: String = "" //the get() of this should only be used in getComponentTagName()
     protected set
 
   open var classes: String? = null
 
   open var style: String? = null
+
+  open var inheritStyle: Boolean = PropaComponentManager.componentsInheritStyle
 
   open val extraAttributes: Map<String, String> = mutableMapOf()
 
@@ -71,31 +76,56 @@ fun PropaComponent.getAttributes(): Map<String, String> {
   return attributes
 }
 
-val PropaComponent.generatedCss: String?
-  get() {
-    val css = this.style?.replace(CssRegex(), {
+
+fun PropaComponent.generateStyleAndScope(attributes: DelegatingMap){
+  if(styleCompiled == null) {
+    styleCompiled = this.style?.replace(CssRegex(), {
       result ->
       var finalStr = ""
-      var selectors = ",>+~{"
-//      console.log("START GROUPS----------")
+      val selectors = ",>+~{"
       for (i in 1..result.groupValues.size) {
         val group = result.groupValues[i]
-//        console.log(group)
-        if (group.trim() == "" || selectors.contains(group.trim())) {
-          finalStr += group
-        } else {
-          finalStr += "$group"
-          treeNode?.path?.forEach {
-            finalStr += "[$it]"
-          }
-
-        }
+        finalStr += group
+        if (group.trim() != "" && !selectors.contains(group.trim()))
+          finalStr = recursiveInheritedStyleScope(finalStr, this, attributes)
       }
-//      console.log("END GROUPS----------")
       finalStr
     })
-    return css
+
+    //if styleCompiled is still null then the component has no set style property
+    if(styleCompiled == null)
+      recursiveInheritedStyleScope(this, attributes)
+  } else {
+    recursiveInheritedStyleScope(this, attributes)
   }
+}
+
+fun recursiveInheritedStyleScope(stringAcc: String, component: PropaComponent, attributes: DelegatingMap): String{
+  if(component.treeNode == null)
+    throwPropaException("A tree node has not been generated for this component.")
+
+  attributes[component.propaId] = ""
+  val nextStr = "$stringAcc[${component.propaId}]"
+
+  val treeNode = component.treeNode!!
+  if(treeNode.parent == null || !component.inheritStyle)
+    return nextStr
+
+  return recursiveInheritedStyleScope(nextStr, treeNode.parent.component, attributes)
+}
+
+fun recursiveInheritedStyleScope(component: PropaComponent, attributes: DelegatingMap){
+  if(component.treeNode == null)
+    throwPropaException("A tree node has not been generated for this component.")
+
+  attributes[component.propaId] = ""
+
+  val treeNode = component.treeNode!!
+  if(treeNode.parent == null || !component.inheritStyle)
+    return
+
+  recursiveInheritedStyleScope(treeNode.parent.component, attributes)
+}
 
 object CssRegex{
   private val regex = Regex("(?:([^{}\\s,+>~]+)(\\s*))(?:([,+>~])|(?:(\\s*)([^{}\\s,+>~]+)(\\s*)))*({)")

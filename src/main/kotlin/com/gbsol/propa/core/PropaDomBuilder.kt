@@ -19,11 +19,11 @@ class PropaDomBuilder<out R : HTMLElement>(val document : Document) : TagConsume
 
   fun insertPropaComponent(component: PropaComponent) =
       PROPACOMPONENT(component.getComponentTagName(), component.getAttributes(), this).
-          visitTree(component, { createStyle(component); (component.template())()})
+          visitTree(component)
 
   fun startPropa(component: PropaComponent) =
       PROPACOMPONENT(component.getComponentTagName(), component.getAttributes(), this).
-          visitAndFinalizeTree(component, this, { createStyle(component); (component.template())()})
+          visitAndFinalizeTree(component, this)
 
   override fun onTagStart(tag: Tag) {
     currentTag = tag
