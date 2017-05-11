@@ -18,6 +18,14 @@ class PropaComponentTree{
   private var _root: PropaComponentTreeNode? = null
   private var _currentNode: PropaComponentTreeNode? = null
 
+  val currentNode: PropaComponentTreeNode
+    get(){
+      if(_currentNode == null)
+        throwPropaException("The component tree has not started or is done traversing.")
+
+      return _currentNode!!
+    }
+
   //Every call to startComponent needs a later call to finishComponent
   fun startComponent(component: PropaComponent){
     val node: PropaComponentTreeNode

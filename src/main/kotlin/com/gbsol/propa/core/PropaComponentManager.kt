@@ -18,10 +18,15 @@ object PropaComponentManager{
 
     do {
       text = "propa-"
-      val possible = "abcdefghijklmnopqrstuvwxyz0123456789"
+      val possibleLetters = "abcdefghijklmnopqrstuvwxyz"
+      val possibleNumbers = "0123456789"
 
-      for (i in 0..4)
-        js("text += possible.charAt(Math.floor(Math.random() * possible.length))")
+      for (i in 0..5) {
+        if(i.rem(2) == 0)
+          js("text += possibleLetters.charAt(Math.floor(Math.random() * possibleLetters.length))")
+        else
+          js("text += possibleNumbers.charAt(Math.floor(Math.random() * possibleNumbers.length))")
+      }
 
     } while (map.contains(text))
 

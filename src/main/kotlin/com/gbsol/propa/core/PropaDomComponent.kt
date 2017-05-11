@@ -13,8 +13,8 @@ open class PROPACOMPONENT(tagName: String, initialAttributes : Map<String, Strin
 fun PROPACOMPONENT.visitTree(component: PropaComponent){
   PropaComponentManager.map[component.propaId] = component
   PropaComponentManager.tree.startComponent(component)
+  component.generateStyleAndScope()
   visit({
-    component.generateStyleAndScope(attributes)
     createStyle(component)
     component.template()()
   })
