@@ -15,11 +15,11 @@ object PropaComponentManager{
 
   fun generatePropaId(): String {
     var text: String
+    val possibleLetters = "abcdefghijklmnopqrstuvwxyz"
+    val possibleNumbers = "0123456789"
 
     do {
       text = "propa-"
-      val possibleLetters = "abcdefghijklmnopqrstuvwxyz"
-      val possibleNumbers = "0123456789"
 
       for (i in 0..5) {
         if(i.rem(2) == 0)

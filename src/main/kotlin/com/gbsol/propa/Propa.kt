@@ -1,8 +1,7 @@
 package com.gbsol.propa
 
 import com.gbsol.propa.core.*
-import com.gbsol.propa.xhtml.removeAllChildren
-import org.w3c.dom.HTMLElement
+import com.gbsol.propa.kxhtml.removeAllChildren
 import org.w3c.dom.get
 import kotlin.browser.document
 
@@ -11,7 +10,7 @@ import kotlin.browser.document
  */
 object Propa {
 
-  //todo: Make a function that sets the PropaComponentManager.componentsInheritStyle property
+  //todo: Make an infix function that sets the PropaComponentManager.componentsInheritStyle property
 
   inline fun<reified T: PropaComponent> entryComponent(component: PropaComponentRenderer<T>){
     val componentInstance = component.createInstance()
