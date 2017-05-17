@@ -32,7 +32,7 @@ class TestComponent: PropaComponent() {
   
   val jsConstructor = this::class.js
 
-//  override var style: String? = require("resources/styles/test.css")
+  override var style: String? = require("resources/styles/test.css")
 
   override var classes: String? = "red"
 

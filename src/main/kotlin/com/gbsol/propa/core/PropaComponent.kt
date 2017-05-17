@@ -125,6 +125,7 @@ fun recursiveInheritedStyleScope(component: PropaComponent,
 }
 
 object CssRegex{
-  private val regex = Regex("(?:([^{}\\s,+>~]+)(\\s*))(?:([,+>~])|(?:(\\s*)([^{}\\s,+>~]+)(\\s*)))*({)")
+//  private val regex = Regex("(?:([^{}\\s,+>~]+)(\\s*))(?:([,+>~])|(?:(\\s*)([^{}\\s,+>~]+)(\\s*)))*({)")
+  private val regex = Regex("(?:([^{}\\s,+>~]+(?:\\s*\\([^{}\\s,+>~]+\\)){0,1})(\\s*))(?:([,+>~])|(?:(\\s*)([^{}\\s,+>~]+(?:\\s*\\([^{}\\s,+>~]+\\)){0,1})(\\s*)))*({)")
   operator fun invoke() = regex
 }

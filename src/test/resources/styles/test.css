@@ -1,7 +1,8 @@
-.test {
+.test:hover, another, andonemore.cool {
     color: blue;
 }
 
 .red {
     color: red
 }
+
