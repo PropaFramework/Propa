@@ -21,7 +21,7 @@ object PropaComponentManager{
     do {
       text = "propa-"
 
-      for (i in 0..5) {
+      for (i in 0..6) {
         if(i.rem(2) == 0)
           js("text += possibleLetters.charAt(Math.floor(Math.random() * possibleLetters.length))")
         else

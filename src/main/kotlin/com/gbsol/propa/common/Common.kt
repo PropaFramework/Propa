@@ -13,7 +13,7 @@ fun String.camelToDashCase(): String {
       }).toLowerCase()
 }
 
-fun String.isProperTagName(): String =
+fun String.getProperTagName(): String =
   if (this.indexOf("-") > 0)
     this.toLowerCase()
   else
