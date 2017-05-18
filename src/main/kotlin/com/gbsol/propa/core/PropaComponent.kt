@@ -102,11 +102,11 @@ fun recursiveInheritedStyleScope(component: PropaComponent,
   recursiveInheritedStyleScope(treeNode.parent.component, scopeAttributes)
 }
 
-fun PropaComponent.recursiveApplyCssAttr(selectorsStr: String, delemiters: MutableList<String> = mutableListOf(" ",",",">","+","~")): String{
-  if(delemiters.isEmpty())
+fun PropaComponent.recursiveApplyCssAttr(selectorsStr: String, delimiters: MutableList<String> = mutableListOf(" ",",",">","+","~")): String{
+  if(delimiters.isEmpty())
     return "$selectorsStr[$propaId]"
 
-  val del = delemiters.removeAt(0);
+  val del = delimiters.removeAt(0);
   val selectors = selectorsStr.split(del)
 
   var returnStr = "";
@@ -114,9 +114,9 @@ fun PropaComponent.recursiveApplyCssAttr(selectorsStr: String, delemiters: Mutab
   for(sel in selectors) {
     if(sel.trim() !="") {
       if (sel === selectors.last())
-        returnStr += recursiveApplyCssAttr(sel, mutableListOf(*delemiters.toTypedArray()))
+        returnStr += recursiveApplyCssAttr(sel, mutableListOf(*delimiters.toTypedArray()))
       else
-        returnStr += recursiveApplyCssAttr(sel, mutableListOf(*delemiters.toTypedArray())) + del
+        returnStr += recursiveApplyCssAttr(sel, mutableListOf(*delimiters.toTypedArray())) + del
     }
   }
 
