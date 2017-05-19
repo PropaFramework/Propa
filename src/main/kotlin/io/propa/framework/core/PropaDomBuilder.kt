@@ -1,5 +1,6 @@
-package com.gbsol.propa.core
+package io.propa.framework.core
 
+import io.propa.framework.common.throwPropaException
 import kotlinx.html.*
 import org.w3c.dom.Document
 import org.w3c.dom.HTMLElement
@@ -92,7 +93,7 @@ class PropaDomBuilder<out R : HTMLElement>(val document : Document) : TagConsume
     // stupid hack as browsers doesn't support createEntityReference
     val s = document.createElement("span") as HTMLElement
     s.innerHTML = entity.text
-    path.last().appendChild(s.childNodes.asList().filter { it.nodeType == Node.Companion.TEXT_NODE }.first())
+    path.last().appendChild(s.childNodes.asList().filter { it.nodeType == Node.TEXT_NODE }.first())
 
     // other solution would be
 //        pathLast().innerHTML += entity.text

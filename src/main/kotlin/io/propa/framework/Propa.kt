@@ -1,7 +1,11 @@
-package com.gbsol.propa
+package io.propa.framework
 
-import com.gbsol.propa.core.*
-import com.gbsol.propa.kxhtml.removeAllChildren
+import io.propa.framework.common.throwPropaException
+import io.propa.framework.core.PropaComponent
+import io.propa.framework.core.PropaComponentManager
+import io.propa.framework.core.PropaComponentRenderer
+import io.propa.framework.core.createInstance
+import io.propa.framework.kxhtml.removeAllChildren
 import org.w3c.dom.get
 import kotlin.browser.document
 

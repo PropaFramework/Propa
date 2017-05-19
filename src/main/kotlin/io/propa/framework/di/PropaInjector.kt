@@ -1,7 +1,7 @@
-package com.gbsol.propa.di
+package io.propa.framework.di
 
-import com.gbsol.propa.common.createInstance
-import com.gbsol.propa.core.throwPropaException
+import io.propa.framework.common.createInstance
+import io.propa.framework.common.throwPropaException
 import kotlin.reflect.KProperty
 
 /**

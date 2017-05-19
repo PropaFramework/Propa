@@ -1,5 +1,6 @@
-package com.gbsol.propa.core
+package io.propa.framework.core
 
+import io.propa.framework.common.throwPropaException
 import kotlinx.html.*
 import org.w3c.dom.HTMLElement
 
@@ -21,7 +22,7 @@ fun PROPACOMPONENT.visitTree(component: PropaComponent){
   PropaComponentManager.tree.finishComponent(component)
 }
 
-fun PROPACOMPONENT.visitAndFinalizeTree(component: PropaComponent, builder: PropaDomBuilder<*>): HTMLElement{
+fun PROPACOMPONENT.visitAndFinalizeTree(component: PropaComponent, builder: PropaDomBuilder<*>): HTMLElement {
   if (consumer !== builder) {
     throwPropaException("Somehow the dom builders became mixed.")
   }

@@ -1,8 +1,9 @@
-package com.gbsol.propa.core
+package io.propa.framework.core
 
-import com.gbsol.propa.common.camelToDashCase
-import com.gbsol.propa.common.createInstance
-import com.gbsol.propa.common.getProperTagName
+import io.propa.framework.common.camelToDashCase
+import io.propa.framework.common.createInstance
+import io.propa.framework.common.getProperTagName
+import io.propa.framework.common.throwPropaException
 import kotlinx.html.HtmlBlockTag
 import org.w3c.dom.Element
 import kotlin.browser.document

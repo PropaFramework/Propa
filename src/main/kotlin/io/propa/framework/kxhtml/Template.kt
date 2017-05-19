@@ -1,4 +1,4 @@
-package com.gbsol.propa.kxhtml
+package io.propa.framework.kxhtml
 
 import kotlinx.html.*
 import kotlinx.html.dom.JSDOMBuilder

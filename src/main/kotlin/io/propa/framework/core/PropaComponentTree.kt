@@ -1,4 +1,6 @@
-package com.gbsol.propa.core
+package io.propa.framework.core
+
+import io.propa.framework.common.throwPropaException
 
 /**
  * Created by gbaldeck on 5/10/2017.

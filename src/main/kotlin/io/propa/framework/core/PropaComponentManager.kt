@@ -1,4 +1,4 @@
-package com.gbsol.propa.core
+package io.propa.framework.core
 
 import org.w3c.dom.HTMLElement
 import kotlin.browser.document

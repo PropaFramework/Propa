@@ -1,7 +1,7 @@
-import com.gbsol.propa.core.*
-import com.gbsol.propa.di.PropaInject
-import com.gbsol.propa.di.PropaService
-import com.gbsol.propa.external.require
+import io.propa.framework.core.*
+import io.propa.framework.di.PropaInject
+import io.propa.framework.di.PropaService
+import io.propa.framework.external.require
 import kotlinx.html.div
 
 /**

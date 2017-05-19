@@ -1,4 +1,4 @@
-group 'gbsol'
+group 'propa'
 version '0.1.0'
 
 buildscript {

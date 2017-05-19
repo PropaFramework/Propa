@@ -1,4 +1,4 @@
-package com.gbsol.propa.core
+package io.propa.framework.common
 
 /**
  * Created by gbaldeck on 4/24/2017.

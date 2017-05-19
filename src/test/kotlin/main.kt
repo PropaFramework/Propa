@@ -1,5 +1,5 @@
-import com.gbsol.propa.Propa
-import com.gbsol.propa.with
+import io.propa.framework.Propa
+import io.propa.framework.with
 
 /**
  * Created by gbaldeck on 4/17/2017.

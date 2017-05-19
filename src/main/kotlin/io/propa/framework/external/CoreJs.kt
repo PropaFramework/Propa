@@ -1,4 +1,4 @@
-package com.gbsol.propa.external
+package io.propa.framework.external
 
 /**
  * Created by gbaldeck on 5/7/2017.
