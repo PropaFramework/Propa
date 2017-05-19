@@ -1,2 +1,2 @@
 # Propa
-Propa's core functionality.
+A frontend framework written in Kotlin for Kotlin.
