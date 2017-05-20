@@ -12,8 +12,11 @@ class LastComponent: PropaComponent(){
 
   val service by PropaInject<TestService>()
 
+  var detect by PropaDetect<String?>(null)
+
   override fun template(): PropaTemplate = {
     div("") {
+      detect = ""
       +"NO styles"
       div("test") {
         +"styles"

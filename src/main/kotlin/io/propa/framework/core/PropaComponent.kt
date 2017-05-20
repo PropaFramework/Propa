@@ -13,15 +13,13 @@ import kotlin.browser.document
  */
 abstract class PropaComponent {
   val propaId: String = PropaComponentManager.generatePropaId()
-  var treeNode: PropaComponentTreeNode? = null
+  internal var treeNode: PropaComponentTreeNode? = null
     get() {
       if(field == null)
         throwPropaException("The component '${getComponentTagName()}' has no corresponding tree node.")
 
       return field
     }
-
-  var styleCompiled: String? = null
 
   open var tagName: String = "" //the get() of this should only be used in getComponentTagName()
     protected set
@@ -30,20 +28,23 @@ abstract class PropaComponent {
 
   open var style: String? = null
 
+  internal var styleCompiled: String? = null
+
   open var inheritStyle: Boolean = PropaComponentManager.componentsInheritStyle
 
-  open val extraAttributes: Map<String, String> = mutableMapOf()
+  open val attributes: Map<String, String> = mutableMapOf()
 
-  val scopeAttributes = mutableMapOf<String, String>() //for use in giving the css scope to each element in the template
+  internal val scopeAttributes = mutableMapOf<String, String>() //for use in giving the css scope to each element in the template
 
+  internal lateinit var _element: Element
   val element: Element
-    get() {
-      val target: Element? = document.querySelector("${getComponentTagName()}[$propaId]")
-
-      return target ?: throwPropaException("Element '${getComponentTagName()}' with propa-id '$propaId' was not found.")
-    }
+    get() = _element
 
   abstract fun template(): PropaTemplate
+  open fun willAttach() {}
+  open fun attached() {}
+  open fun willDetach() {}
+  open fun detached() {}
 }
 
 fun PropaComponent.getComponentTagName(): String =
@@ -71,8 +72,9 @@ inline fun <reified T : PropaComponent> PropaComponentRenderer<T>.createInstance
 fun PropaComponent.getAttributes(): Map<String, String> {
   val attributes = linkedMapOf<String, String>()
 
+  attributes["propaId"] = this.propaId
   this.classes?.let { attributes["class"] = it.trim() }
-  this.extraAttributes.forEach { (key, value) -> attributes[key.trim()] = value.trim() }
+  this.attributes.forEach { (key, value) -> attributes[key.trim()] = value.trim() }
 
   return attributes
 }

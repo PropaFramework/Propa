@@ -45,6 +45,8 @@ class PropaDomBuilder<out R : HTMLElement>(val document : Document) : TagConsume
 
     currentTag?.attributes?.apply { putAll(PropaComponentManager.tree.currentNode.component.scopeAttributes) }
         ?: throwPropaException("Error applying scope attributes to tag.")
+
+    PropaComponentManager.tree.currentNode.component._element = element
   }
 
   override fun onTagAttributeChange(tag: Tag, attribute: String, value: String?) {

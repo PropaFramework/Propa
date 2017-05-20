@@ -3,7 +3,7 @@ package io.propa.framework.common
 /**
  * Created by gbaldeck on 5/7/2017.
  */
-fun String.camelToDashCase(): String {
+internal fun String.camelToDashCase(): String {
   return this.replace(Regex("([a-z])([A-Z])"), {
         result ->
           val (g1: String, g2: String) = result.destructured
@@ -11,7 +11,7 @@ fun String.camelToDashCase(): String {
       }).toLowerCase()
 }
 
-fun String.getProperTagName(): String =
+internal fun String.getProperTagName(): String =
   if (this.indexOf("-") > 0)
     this.toLowerCase()
   else

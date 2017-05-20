@@ -7,7 +7,7 @@ import kotlin.reflect.KClass
  */
 fun <T : Any> KClass<T>.createInstance(vararg args: Any?): T {
   val cls = this.js
-  val allArgs = arrayOf<Any?>(null) + args
+  val allArgs = arrayOf(null, *args)
   return js("new (Function.prototype.bind.apply(cls, allArgs))")
 }
 

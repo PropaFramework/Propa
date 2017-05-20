@@ -5,7 +5,7 @@ import io.propa.framework.common.throwPropaException
 /**
  * Created by gbaldeck on 5/10/2017.
  */
-class PropaComponentTreeNode(val component: PropaComponent, val parent: PropaComponentTreeNode? = null) {
+internal class PropaComponentTreeNode(val component: PropaComponent, val parent: PropaComponentTreeNode? = null) {
   val id
     get() = component.propaId
 
@@ -16,7 +16,7 @@ class PropaComponentTreeNode(val component: PropaComponent, val parent: PropaCom
   }
 }
 
-class PropaComponentTree{
+internal class PropaComponentTree{
   private var _root: PropaComponentTreeNode? = null
   private var _currentNode: PropaComponentTreeNode? = null
 

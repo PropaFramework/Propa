@@ -8,7 +8,7 @@ import kotlin.browser.document
  */
 object PropaComponentManager{
   val renderer = PropaDomBuilder<HTMLElement>(document)
-  val tree = PropaComponentTree()
+  internal val tree = PropaComponentTree()
   val map = mutableMapOf<String, PropaComponent>()
 
   var componentsInheritStyle = false
