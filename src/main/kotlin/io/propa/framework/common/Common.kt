@@ -16,3 +16,25 @@ internal fun String.getProperTagName(): String =
     this.toLowerCase()
   else
     throwPropaException("The chosen tag name '$this' is not in the correct custom tag format.")
+
+fun jsObjectOf(vararg pairs: Pair<String, Any?>): dynamic{
+  js("var obj = {}")
+  pairs.forEach {
+    (key, value) ->
+    js("obj[key] = value")
+  }
+  return js("obj")
+}
+
+fun jsObjectOf(map: Map<String, Any?>): dynamic = jsObjectOf(*map.toList().toTypedArray())
+
+fun jsArrayOf(vararg items: Any?): dynamic{
+  js("var obj = []")
+  items.forEach {
+    value ->
+    js("obj.push(value)")
+  }
+  return js("obj")
+}
+
+fun jsArrayOf(list: List<Any?>): dynamic = jsArrayOf(*list.toTypedArray())

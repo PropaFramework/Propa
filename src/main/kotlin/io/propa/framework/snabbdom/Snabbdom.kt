@@ -11,4 +11,40 @@ external object Snabbdom{
 
 @JsModule("snabbdom/h")
 @JsNonModule
-external fun h(a:dynamic, b:dynamic, c:dynamic) { definedExternally }
+external object h_external{
+  fun default(sel: dynamic, b:dynamic, c:dynamic): dynamic = definedExternally
+}
+
+fun h(sel: String, b:dynamic = undefined, c:dynamic = undefined) = h_external.default(sel, b, c)
+
+@JsModule("snabbdom/modules/class")
+@JsNonModule
+external object SnabbClass_external {
+  val default:dynamic = definedExternally
+}
+
+val SnabbClass = SnabbClass_external.default
+
+@JsModule("snabbdom/modules/props")
+@JsNonModule
+external object SnabbProps_external {
+  val default:dynamic = definedExternally
+}
+
+val SnabbProps = SnabbProps_external.default
+
+@JsModule("snabbdom/modules/style")
+@JsNonModule
+external object SnabbStyle_external {
+  val default:dynamic = definedExternally
+}
+
+val SnabbStyle = SnabbStyle_external.default
+
+@JsModule("snabbdom/modules/eventlisteners")
+@JsNonModule
+external object SnabbEventListeners_external {
+  val default:dynamic = definedExternally
+}
+
+val SnabbEventListeners = SnabbEventListeners_external.default
