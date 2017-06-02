@@ -1,4 +1,6 @@
 import io.propa.framework.Propa
+import io.propa.framework.snabbdom.Snabbdom
+import io.propa.framework.snabbdom.h
 import io.propa.framework.with
 
 /**
@@ -13,5 +15,8 @@ fun main(args: Array<String>){
 //  console.log("has class false: ", PropaEntity::class.extendsOrImplements(PropaElement::class))
 
 //  document.create.style { scoped=true }
-  Propa start with component OtherTestComponent
+
+  console.log(Snabbdom)
+//  console.log(h())
+  h("test", "test", "test")
 }

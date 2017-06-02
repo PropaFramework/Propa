@@ -47,6 +47,7 @@ dependencies {
 kotlinFrontend {
 //    sourceMaps = true
     npm {
+        dependency("snabbdom", "0.6.9")
         dependency("core-js")
 
         devDependency("css-loader")
