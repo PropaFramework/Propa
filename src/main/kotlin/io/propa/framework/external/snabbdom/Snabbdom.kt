@@ -1,4 +1,4 @@
-package io.propa.framework.snabbdom
+package io.propa.framework.external.snabbdom
 
 /**
  * Created by gbaldeck on 6/1/2017.

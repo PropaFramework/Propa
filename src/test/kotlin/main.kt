@@ -1,10 +1,8 @@
-import io.propa.framework.Propa
 import io.propa.framework.common.jsArrayOf
 import io.propa.framework.common.jsObjectOf
-import io.propa.framework.snabbdom.SnabbClass
-import io.propa.framework.snabbdom.Snabbdom
-import io.propa.framework.snabbdom.h
-import io.propa.framework.with
+import io.propa.framework.external.snabbdom.SnabbClass
+import io.propa.framework.external.snabbdom.Snabbdom
+import io.propa.framework.external.snabbdom.h
 
 /**
  * Created by gbaldeck on 4/17/2017.
@@ -20,7 +18,7 @@ fun main(args: Array<String>){
 //  document.create.style { scoped=true }
 
   console.log(Snabbdom)
-  console.log(h("div"))
+  console.log(h("span"))
   console.log(SnabbClass)
 //  console.log(SnabbClass.default)
   console.log(jsObjectOf("thispair" to "that", "itto" to 123, "null" to null))
