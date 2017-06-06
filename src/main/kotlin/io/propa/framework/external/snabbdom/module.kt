@@ -9,10 +9,3 @@ external interface Module {
     var remove: RemoveHook
     var post: PostHook
 }
-
-typealias PreHook = () -> Unit
-typealias CreateHook = () -> Unit
-typealias UpdateHook = () -> Unit
-typealias DestroyHook = () -> Unit
-typealias RemoveHook = () -> Unit
-typealias PostHook = () -> Unit

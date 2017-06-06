@@ -5,7 +5,7 @@ package io.propa.framework.external.snabbdom
 @JsNonModule
 external val propsModule: Module = definedExternally
 
-external class Props{
-  operator fun get(key: String): Any = definedExternally
-  operator fun set(key: String, value: Any): Unit = definedExternally
+class Props{
+  operator fun get(key: String): Any = js("this[key]")
+  operator fun set(key: String, value: Any): Unit = js("this[key]=value")
 }

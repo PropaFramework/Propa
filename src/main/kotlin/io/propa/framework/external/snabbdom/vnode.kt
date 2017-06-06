@@ -24,24 +24,22 @@ external interface VNode {
     var text: String?
     var key: dynamic /* String | Number */
 }
-external interface VNodeData {
-    var props: Props? get() = definedExternally; set(value) = definedExternally
+open class VNodeData {
+    var props: Props? = undefined
 //    var attrs: Attrs? get() = definedExternally; set(value) = definedExternally
 //    var `class`: Classes? get() = definedExternally; set(value) = definedExternally
 //    var style: VNodeStyle? get() = definedExternally; set(value) = definedExternally
 //    var dataset: Dataset? get() = definedExternally; set(value) = definedExternally
 //    var on: On? get() = definedExternally; set(value) = definedExternally
 //    var hero: Hero? get() = definedExternally; set(value) = definedExternally
-    var attachData: AttachData? get() = definedExternally; set(value) = definedExternally
-    var hook: Hooks? get() = definedExternally; set(value) = definedExternally
-    var key: dynamic /* String | Number */ get() = definedExternally; set(value) = definedExternally
-    var ns: String? get() = definedExternally; set(value) = definedExternally
-    var fn: (() -> VNode)? get() = definedExternally; set(value) = definedExternally
-    var args: Array<Any>? get() = definedExternally; set(value) = definedExternally
-    @nativeGetter
-    operator fun get(key: String): Any?
-    @nativeSetter
-    operator fun set(key: String, value: Any)
+    var attachData: AttachData? = undefined
+    var hook: Hooks? = undefined
+    var key: dynamic  = undefined
+    var ns: String?  = undefined
+    var fn: (() -> VNode)?  = undefined
+    var args: Array<Any>?  = undefined
+    operator fun get(key: String): Any? = js("this[key]")
+    operator fun set(key: String, value: Any) = js("this[key] = value")
 }
 @JsModule("vnode")
 external fun vnode(sel: String?, data: Any?, children: Array<dynamic /* VNode | String */>?, text: String?, elm: Element): VNode = definedExternally

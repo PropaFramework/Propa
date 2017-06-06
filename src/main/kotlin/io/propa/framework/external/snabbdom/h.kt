@@ -3,21 +3,14 @@
 @file:JsNonModule
 package io.propa.framework.external.snabbdom
 
-//@JsModule("snabbdom/h")
-//@JsNonModule
 external fun h(sel: String): VNode = definedExternally
-//@JsModule("snabbdom/h")
-//@JsNonModule
+
 external fun h(sel: String, data: VNodeData): VNode = definedExternally
-//@JsModule("snabbdom/h")
-//@JsNonModule
+
 external fun h(sel: String, text: String): VNode = definedExternally
-//@JsModule("snabbdom/h")
-//@JsNonModule
+
 external fun h(sel: String, children: Array<VNode?>): VNode = definedExternally
-//@JsModule("snabbdom/h")
-//@JsNonModule
+
 external fun h(sel: String, data: VNodeData, text: String): VNode = definedExternally
-//@JsModule("snabbdom/h")
-//@JsNonModule
+
 external fun h(sel: String, data: VNodeData, children: Array<VNode?>): VNode = definedExternally

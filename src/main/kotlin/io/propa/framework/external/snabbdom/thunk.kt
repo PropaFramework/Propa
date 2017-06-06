@@ -16,5 +16,17 @@ import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
 
-external var array: (arg: Any) -> Boolean = definedExternally
-external fun primitive(s: Any): Boolean = definedExternally
+interface ThunkData : VNodeData {
+    override var fn: (() -> VNode)?
+    override var args: Array<Any>?
+}
+external interface Thunk : VNode {
+//    override var data: ThunkData?
+}
+external interface ThunkFn {
+    operator fun invoke(sel: String, fn: Function<*>, args: Array<Any>): Thunk
+    operator fun invoke(sel: String, key: Any, fn: Function<*>, args: Array<Any>): Thunk
+}
+
+@JsModule("thunk")
+external val thunk: ThunkFn = definedExternally
