@@ -1,4 +1,5 @@
 @file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE", "CONFLICTING_OVERLOADS")
+package io.propa.framework.external.snabbdom
 
 import kotlin.js.*
 import kotlin.js.Json
@@ -25,12 +26,12 @@ external interface VNode {
 }
 external interface VNodeData {
     var props: Props? get() = definedExternally; set(value) = definedExternally
-    var attrs: Attrs? get() = definedExternally; set(value) = definedExternally
-    var `class`: Classes? get() = definedExternally; set(value) = definedExternally
-    var style: VNodeStyle? get() = definedExternally; set(value) = definedExternally
-    var dataset: Dataset? get() = definedExternally; set(value) = definedExternally
-    var on: On? get() = definedExternally; set(value) = definedExternally
-    var hero: Hero? get() = definedExternally; set(value) = definedExternally
+//    var attrs: Attrs? get() = definedExternally; set(value) = definedExternally
+//    var `class`: Classes? get() = definedExternally; set(value) = definedExternally
+//    var style: VNodeStyle? get() = definedExternally; set(value) = definedExternally
+//    var dataset: Dataset? get() = definedExternally; set(value) = definedExternally
+//    var on: On? get() = definedExternally; set(value) = definedExternally
+//    var hero: Hero? get() = definedExternally; set(value) = definedExternally
     var attachData: AttachData? get() = definedExternally; set(value) = definedExternally
     var hook: Hooks? get() = definedExternally; set(value) = definedExternally
     var key: dynamic /* String | Number */ get() = definedExternally; set(value) = definedExternally

@@ -1,4 +1,5 @@
 @file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE", "CONFLICTING_OVERLOADS")
+package io.propa.framework.external.snabbdom
 
 import kotlin.js.*
 import kotlin.js.Json
@@ -20,7 +21,7 @@ external interface ThunkData : VNodeData {
     override var args: Array<Any>?
 }
 external interface Thunk : VNode {
-    override var data: ThunkData?
+//    override var data: ThunkData?
 }
 external interface ThunkFn {
     operator fun invoke(sel: String, fn: Function<*>, args: Array<Any>): Thunk

@@ -15,4 +15,4 @@ import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
 
-external fun init(modules: Array<Partial<Module>>, domApi: DOMAPI? = definedExternally /* null */): (oldVnode: dynamic /* Element | VNode */, vnode: VNode) -> VNode = definedExternally
+//external fun init(modules: Array<Partial<Module>>, domApi: DOMAPI? = definedExternally /* null */): (oldVnode: dynamic /* Element | VNode */, vnode: VNode) -> VNode = definedExternally
