@@ -8,20 +8,20 @@ import org.w3c.dom.*
 external val htmlDomApiModule:dynamic = definedExternally
 val htmlDomApi: DOMAPI = htmlDomApiModule.default
 
-interface DOMAPI {
-    var createElement: (tagName: Any) -> HTMLElement
-    var createElementNS: (namespaceURI: String, qualifiedName: String) -> Element
-    var createTextNode: (text: String) -> Text
-    var createComment: (text: String) -> Comment
-    var insertBefore: (parentNode: Node, newNode: Node, referenceNode: Node?) -> Unit
-    var removeChild: (node: Node, child: Node) -> Unit
-    var appendChild: (node: Node, child: Node) -> Unit
-    var parentNode: (node: Node) -> Node
-    var nextSibling: (node: Node) -> Node
-    var tagName: (elm: Element) -> String
-    var setTextContent: (node: Node, text: String?) -> Unit
-    var getTextContent: (node: Node) -> String?
-    var isElement: (node: Node) -> Boolean
-    var isText: (node: Node) -> Boolean
-    var isComment: (node: Node) -> Boolean
+external interface DOMAPI {
+    fun createElement(tagName: dynamic): HTMLElement
+    fun createElementNS(namespaceURI: String, qualifiedName: String): Element
+    fun createTextNode(text: String): Text
+    fun createComment(text: String): Comment
+    fun insertBefore(parentNode: Node, newNode: Node, referenceNode: Node?): Unit
+    fun removeChild(node: Node, child: Node): Unit
+    fun appendChild(node: Node, child: Node): Unit
+    fun parentNode(node: Node): Node
+    fun nextSibling(node: Node): Node
+    fun tagName(elm: Element): String
+    fun setTextContent(node: Node, text: String?): Unit
+    fun getTextContent(node: Node): String?
+    fun isElement(node: Node): Boolean
+    fun isText(node: Node): Boolean
+    fun isComment(node: Node): Boolean
 }

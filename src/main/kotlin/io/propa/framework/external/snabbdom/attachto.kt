@@ -10,10 +10,10 @@ external val attachTo: dynamic = definedExternally
 fun attachTo(target: Element, vnode: VNode): VNode = attachTo.default(target, vnode)
 
 open class AttachData {
-    operator fun get(key: String): Any? = js("this[key]")
-    operator fun set(key: String, value: Any) { js("this[key] = value") }
-    operator fun get(i: Number): Any? = js("this[key]")
-    operator fun set(i: Number, value: Any) { js("this[key] = value") }
-    var placeholder: Any? = undefined
+    operator fun get(key: String): dynamic = js("this[key]")
+    operator fun set(key: String, value: dynamic) { js("this[key] = value") }
+    operator fun get(i: Number): dynamic = js("this[key]")
+    operator fun set(i: Number, value: dynamic) { js("this[key] = value") }
+    var placeholder: dynamic = undefined
     var real: Node? = undefined
 }

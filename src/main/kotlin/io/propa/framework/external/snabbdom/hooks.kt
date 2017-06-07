@@ -2,25 +2,25 @@
 package io.propa.framework.external.snabbdom
 
 open class Hooks {
-    lateinit var pre: PreHook
-    lateinit var init: InitHook
-    lateinit var create: CreateHook
-    lateinit var insert: InsertHook
-    lateinit var prepatch: PrePatchHook
-    lateinit var update: UpdateHook
-    lateinit var postpatch: PostPatchHook
-    lateinit var destroy: DestroyHook
-    lateinit var remove: RemoveHook
-    lateinit var post: PostHook
+    var pre: PreHook? = undefined
+    var init: InitHook? = undefined
+    var create: CreateHook? = undefined
+    var insert: InsertHook? = undefined
+    var prepatch: PrePatchHook? = undefined
+    var update: UpdateHook? = undefined
+    var postpatch: PostPatchHook? = undefined
+    var destroy: DestroyHook? = undefined
+    var remove: RemoveHook? = undefined
+    var post: PostHook? = undefined
 }
 
-typealias PreHook = () -> Any?
-typealias InitHook = (vNode: VNode) -> Any?
-typealias CreateHook = (emptyVNode: VNode, vNode: VNode) -> Any?
-typealias InsertHook = (vNode: VNode) -> Any?
-typealias PrePatchHook = (oldVNode: VNode, vNode: VNode) -> Any?
-typealias UpdateHook = (oldVNode: VNode, vNode: VNode) -> Any?
-typealias PostPatchHook = (oldVNode: VNode, vNode: VNode) -> Any?
-typealias DestroyHook = (vNode: VNode) -> Any?
-typealias RemoveHook = (vNode: VNode, removeCallback: () -> Unit) -> Any?
-typealias PostHook = () -> Any?
+typealias PreHook = () -> dynamic
+typealias InitHook = (vNode: VNode) -> dynamic
+typealias CreateHook = (emptyVNode: VNode, vNode: VNode) -> dynamic
+typealias InsertHook = (vNode: VNode) -> dynamic
+typealias PrePatchHook = (oldVNode: VNode, vNode: VNode) -> dynamic
+typealias UpdateHook = (oldVNode: VNode, vNode: VNode) -> dynamic
+typealias PostPatchHook = (oldVNode: VNode, vNode: VNode) -> dynamic
+typealias DestroyHook = (vNode: VNode) -> dynamic
+typealias RemoveHook = (vNode: VNode, removeCallback: () -> Unit) -> dynamic
+typealias PostHook = () -> dynamic

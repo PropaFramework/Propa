@@ -2,10 +2,10 @@
 package io.propa.framework.external.snabbdom
 
 external interface Module {
-    var pre: PreHook
-    var create: CreateHook
-    var update: UpdateHook
-    var destroy: DestroyHook
-    var remove: RemoveHook
-    var post: PostHook
+    var pre: PreHook?
+    var create: CreateHook?
+    var update: UpdateHook?
+    var destroy: DestroyHook?
+    var remove: RemoveHook?
+    var post: PostHook?
 }
