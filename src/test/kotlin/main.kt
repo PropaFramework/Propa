@@ -1,12 +1,9 @@
-import io.propa.framework.common.jsArrayOf
-import io.propa.framework.common.jsObjectOf
-import io.propa.framework.external.snabbdom.*
-import org.w3c.dom.events.Event
-import org.w3c.dom.events.UIEvent
 //import io.propa.framework.dom.PropaDomBuilder
 //import io.propa.framework.external.snabbdom.SnabbClass
 //import io.propa.framework.external.snabbdom.Snabbdom
 //import io.propa.framework.external.snabbdom.h
+import io.propa.framework.common.jsObjectOf
+import io.propa.framework.external.snabbdom.*
 import org.w3c.dom.get
 import kotlin.browser.document
 
@@ -22,9 +19,11 @@ fun main(args: Array<String>){
 //  console.log("has class false: ", PropaEntity::class.extendsOrImplements(PropaElement::class))
 
 //  document.create.style { scoped=true }
-
-  console.log(array(arrayOf(1)))
-  console.log(primitive(""))
+  console.log(toVNode(document.createElement("cooleo")))
+  console.log(toVNodeModule)
+  console.log(Snabbdom)
+  console.log(thunkFn("", {}, arrayOf(1)))
+  console.log(thunkFn("", 1, {}, arrayOf(1)))
 
   val on = On()
   console.log(htmlDomApi)
@@ -36,6 +35,7 @@ fun main(args: Array<String>){
   val props = Props()
   props["test"] = 1
   val vnodeData = VNodeData()
+  vnodeData["testm2"] = 123
   vnodeData.props = props
   console.log(props)
   console.log(vnodeData)
@@ -51,10 +51,14 @@ fun main(args: Array<String>){
           )
       ),
       "Hola")
-  val children = jsArrayOf(
+  val children = arrayOf(
       vnode,
       h("p", "A simple paragraph.")
-  ) as Array<VNode?>
+  )
+
+//  vnode.data?.let { it["add"] = "data" }
+  console.log("vnode: ", vnode)
+  console.log("vnode data: ", vnode.data)
 
   val attachtoo = attachTo(document.getElementsByTagName("propa-app")[0]!!, vnode)
   console.log(attachtoo)
@@ -71,5 +75,4 @@ fun main(args: Array<String>){
 //  console.log(SnabbClass)
 //  console.log(SnabbClass.default)
   console.log(jsObjectOf("thispair" to "that", "itto" to 123, "null" to null))
-  console.log(jsArrayOf("test", 1, 3, "too"))
 }

@@ -5,9 +5,12 @@ package io.propa.framework.external.snabbdom
 @JsNonModule
 external val attributesModule: Module = definedExternally
 
-open class Attrs {
-  operator fun get(key: String): dynamic = js("this[key]")
-  operator fun set(key: String, value: String) { js("this[key] = value") }
-  operator fun set(key: String, value: Number) { js("this[key] = value") }
-  operator fun set(key: String, value: Boolean) { js("this[key] = value") }
-}
+open class Attrs
+
+operator fun Attrs.get(key: String): dynamic = this._get(key)
+
+operator fun Attrs.set(key: String, value: String) { this._set(key, value) }
+
+operator fun Attrs.set(key: String, value: Number) { this._set(key, value) }
+
+operator fun Attrs.set(key: String, value: Boolean) { this._set(key, value) }

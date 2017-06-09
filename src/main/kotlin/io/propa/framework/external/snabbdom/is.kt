@@ -3,5 +3,5 @@
 @file:JsNonModule
 package io.propa.framework.external.snabbdom
 
-external fun array(arg: Any?): Boolean = definedExternally
-external fun primitive(s: Any?): Boolean = definedExternally
+external fun array(arg: dynamic): Boolean = definedExternally
+external fun primitive(s: dynamic): Boolean = definedExternally

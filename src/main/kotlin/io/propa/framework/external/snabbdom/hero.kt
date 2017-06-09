@@ -6,6 +6,6 @@ package io.propa.framework.external.snabbdom
 external val heroModule: Module = definedExternally
 
 open class Hero {
-    lateinit var id: String
+    var id: String? = undefined
 }
 

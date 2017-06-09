@@ -5,7 +5,7 @@ package io.propa.framework.external.snabbdom
 @JsNonModule
 external val datasetModule: Module = definedExternally
 
-open class Dataset{
-  operator fun get(key: String) = js("this[key]")
-  operator fun set(key: String, value: String) { js("this[key] = value") }
-}
+open class Dataset
+
+operator fun Dataset.get(key: String): String = this._get(key)
+operator fun Dataset.set(key: String, value: String) { this._set(key, value) }

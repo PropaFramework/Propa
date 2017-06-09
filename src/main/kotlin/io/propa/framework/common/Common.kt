@@ -27,14 +27,3 @@ fun jsObjectOf(vararg pairs: Pair<String, Any?>): dynamic{
 }
 
 fun jsObjectOf(map: Map<String, Any?>): dynamic = jsObjectOf(*map.toList().toTypedArray())
-
-fun jsArrayOf(vararg items: Any?): dynamic{
-  js("var obj = []")
-  items.forEach {
-    value ->
-    js("obj.push(value)")
-  }
-  return js("obj")
-}
-
-fun jsArrayOf(list: List<Any?>): dynamic = jsArrayOf(*list.toTypedArray())

@@ -10,9 +10,10 @@ import org.w3c.xhr.ProgressEvent
 @JsNonModule
 external val eventListenersModule: Module = definedExternally
 
+operator fun On.get(key: String): (dynamic) -> Unit = this._get(key)
+operator fun On.set(key: String, value: (dynamic) -> Unit) { this._set(key, value) }
+
 open class On {
-  operator fun get(key: String): (dynamic) -> Unit = js("this[key]")
-  operator fun set(key: String, value: (dynamic) -> Unit) { js("this[key] = value") }
   var abort: ((UIEvent) -> Unit)? = undefined
   var activate: ((UIEvent) -> Unit)? = undefined
   var beforeactivate: ((UIEvent) -> Unit)? = undefined

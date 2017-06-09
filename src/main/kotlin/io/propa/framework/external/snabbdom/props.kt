@@ -5,7 +5,7 @@ package io.propa.framework.external.snabbdom
 @JsNonModule
 external val propsModule: Module = definedExternally
 
-open class Props{
-  operator fun get(key: String): dynamic = js("this[key]")
-  operator fun set(key: String, value: dynamic): Unit = js("this[key]=value")
-}
+open class Props
+
+operator fun Props.get(key: String): dynamic = this._get(key)
+operator fun Props.set(key: String, value: dynamic): Unit { this._set(key, value) }
