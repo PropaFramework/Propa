@@ -15,9 +15,6 @@ open class AttachData {
 }
 
 operator fun AttachData.get(key: String): dynamic = this._get(key)
-
 operator fun AttachData.set(key: String, value: dynamic) { this._set(key, value) }
-
 operator fun AttachData.get(key: Number): dynamic = this._get(key)
-
 operator fun AttachData.set(key: Number, value: dynamic) { this._set(key, value) }

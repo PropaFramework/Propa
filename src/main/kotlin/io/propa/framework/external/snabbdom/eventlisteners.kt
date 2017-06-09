@@ -8,7 +8,8 @@ import org.w3c.xhr.ProgressEvent
 
 @JsModule("snabbdom/modules/eventlisteners")
 @JsNonModule
-external val eventListenersModule: Module = definedExternally
+external val eventListenersModule_ext: dynamic = definedExternally
+val eventListenersModule: Module = eventListenersModule_ext.default
 
 operator fun On.get(key: String): (dynamic) -> Unit = this._get(key)
 operator fun On.set(key: String, value: (dynamic) -> Unit) { this._set(key, value) }

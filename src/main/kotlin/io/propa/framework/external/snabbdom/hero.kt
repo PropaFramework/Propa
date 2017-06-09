@@ -3,9 +3,10 @@ package io.propa.framework.external.snabbdom
 
 @JsModule("snabbdom/modules/hero")
 @JsNonModule
-external val heroModule: Module = definedExternally
+external val heroModule_ext: dynamic = definedExternally
+val heroModule: Module = heroModule_ext.default
 
-open class Hero {
-    var id: String? = undefined
+external interface Hero {
+    var id: String?
 }
 

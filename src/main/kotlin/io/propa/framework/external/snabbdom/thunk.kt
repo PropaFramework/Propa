@@ -9,10 +9,10 @@ open class ThunkData : VNodeData()
 
 external interface Thunk : VNode
 
-fun thunkFn(sel: String, fn: Function<*>, args: Array<dynamic>): Thunk {
+fun thunk(sel: String, fn: Function<*>, args: Array<dynamic>): Thunk {
   return thunkModule.default(sel, fn, args)
 }
 
-fun thunkFn(sel: String, key: Any, fn: Function<*>, args: Array<dynamic>): Thunk {
+fun thunk(sel: String, key: Any, fn: Function<*>, args: Array<dynamic>): Thunk {
   return thunkModule.default(sel, key, fn, args)
 }

@@ -22,8 +22,8 @@ fun main(args: Array<String>){
   console.log(toVNode(document.createElement("cooleo")))
   console.log(toVNodeModule)
   console.log(Snabbdom)
-  console.log(thunkFn("", {}, arrayOf(1)))
-  console.log(thunkFn("", 1, {}, arrayOf(1)))
+  console.log(thunk("", {}, arrayOf(1)))
+  console.log(thunk("", 1, {}, arrayOf(1)))
 
   val on = On()
   console.log(htmlDomApi)

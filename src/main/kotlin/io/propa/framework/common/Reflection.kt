@@ -5,7 +5,7 @@ import kotlin.reflect.KClass
 /**
  * Created by gbaldeck on 4/25/2017.
  */
-fun <T : Any> KClass<T>.createInstance(vararg args: Any?): T {
+fun <T : Any> KClass<T>.createInstance(vararg args: dynamic): T {
   val cls = this.js
   val allArgs = arrayOf(null, *args)
   return js("new (Function.prototype.bind.apply(cls, allArgs))")

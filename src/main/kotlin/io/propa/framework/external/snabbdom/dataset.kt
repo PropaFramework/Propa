@@ -3,7 +3,8 @@ package io.propa.framework.external.snabbdom
 
 @JsModule("snabbdom/modules/dataset")
 @JsNonModule
-external val datasetModule: Module = definedExternally
+external val datasetModule_ext: dynamic = definedExternally
+val datasetModule: Module =  datasetModule_ext.default
 
 open class Dataset
 

@@ -3,7 +3,8 @@ package io.propa.framework.external.snabbdom
 
 @JsModule("snabbdom/modules/style")
 @JsNonModule
-external val styleModule: Module = definedExternally
+external val styleModule_ext: dynamic = definedExternally
+val styleModule: Module = styleModule_ext.default
 
 open class VNodeStyle{
   var delayed: Delayed? = undefined

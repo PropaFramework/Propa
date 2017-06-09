@@ -50,7 +50,7 @@ open class VNodeData {
     var key: dynamic  = undefined
     var ns: String?  = undefined
     var fn: (() -> VNode)?  = undefined
-    var args: Array<Any>?  = undefined
+    var args: Array<dynamic>?  = undefined
 }
 
 operator fun VNodeData.get(key: String): dynamic = this._get(key)

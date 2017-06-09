@@ -3,7 +3,8 @@ package io.propa.framework.external.snabbdom
 
 @JsModule("snabbdom/modules/props")
 @JsNonModule
-external val propsModule: Module = definedExternally
+external val propsModule_ext: dynamic = definedExternally
+val propsModule: Module = propsModule_ext.default
 
 open class Props
 
