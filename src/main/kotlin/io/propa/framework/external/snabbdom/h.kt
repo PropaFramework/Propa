@@ -9,8 +9,8 @@ external fun h(sel: String, data: VNodeData): VNode = definedExternally
 
 external fun h(sel: String, text: String): VNode = definedExternally
 
-external fun h(sel: String, children: Array<VNode?>): VNode = definedExternally
+external fun h(sel: String, children: Array<dynamic>): VNode = definedExternally
 
 external fun h(sel: String, data: VNodeData, text: String): VNode = definedExternally
 
-external fun h(sel: String, data: VNodeData, children: Array<VNode?>): VNode = definedExternally
+external fun h(sel: String, data: VNodeData, children: Array<dynamic>): VNode = definedExternally

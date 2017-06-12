@@ -41,3 +41,8 @@ class DelegateProperty(val backingObj: Any, val propertyName: String? = null){
     backingObj._set(propertyName ?: property.name, value)
   }
 }
+
+fun <T> assertSafeCast(obj: Any): T{
+  @Suppress("UNCHECKED_CAST")
+  return obj as T
+}
