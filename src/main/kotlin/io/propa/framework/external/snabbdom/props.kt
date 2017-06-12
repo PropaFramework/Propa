@@ -6,7 +6,7 @@ package io.propa.framework.external.snabbdom
 external val propsModule_ext: dynamic = definedExternally
 val propsModule: Module = propsModule_ext.default
 
-open class Props
+external interface Props
 
 operator fun Props.get(key: String): dynamic = this._get(key)
 operator fun Props.set(key: String, value: dynamic): Unit { this._set(key, value) }

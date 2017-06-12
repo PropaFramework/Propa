@@ -1,17 +1,17 @@
 @file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE", "CONFLICTING_OVERLOADS")
 package io.propa.framework.external.snabbdom
 
-open class Hooks {
-    var pre: PreHook? = undefined
-    var init: InitHook? = undefined
-    var create: CreateHook? = undefined
-    var insert: InsertHook? = undefined
-    var prepatch: PrePatchHook? = undefined
-    var update: UpdateHook? = undefined
-    var postpatch: PostPatchHook? = undefined
-    var destroy: DestroyHook? = undefined
-    var remove: RemoveHook? = undefined
-    var post: PostHook? = undefined
+external interface Hooks {
+    var pre: PreHook?
+    var init: InitHook?
+    var create: CreateHook?
+    var insert: InsertHook?
+    var prepatch: PrePatchHook?
+    var update: UpdateHook?
+    var postpatch: PostPatchHook?
+    var destroy: DestroyHook?
+    var remove: RemoveHook?
+    var post: PostHook?
 }
 
 typealias PreHook = () -> dynamic

@@ -6,7 +6,7 @@ package io.propa.framework.external.snabbdom
 external val datasetModule_ext: dynamic = definedExternally
 val datasetModule: Module =  datasetModule_ext.default
 
-open class Dataset
+external interface Dataset
 
 operator fun Dataset.get(key: String): String = this._get(key)
 operator fun Dataset.set(key: String, value: String) { this._set(key, value) }

@@ -6,12 +6,12 @@ package io.propa.framework.external.snabbdom
 external val styleModule_ext: dynamic = definedExternally
 val styleModule: Module = styleModule_ext.default
 
-open class VNodeStyle{
-  var delayed: Delayed? = undefined
-  var remove: Remove? = undefined
+external interface VNodeStyle{
+  var delayed: Delayed?
+  var remove: Remove?
 
-  open class Delayed
-  open class Remove
+  interface Delayed
+  interface Remove
 }
 
 operator fun VNodeStyle.get(key: String): String = this._get(key)

@@ -5,7 +5,7 @@ package io.propa.framework.external.snabbdom
 @JsNonModule
 external val thunkModule: dynamic = definedExternally
 
-open class ThunkData : VNodeData()
+external interface ThunkData : VNodeData
 
 external interface Thunk : VNode
 

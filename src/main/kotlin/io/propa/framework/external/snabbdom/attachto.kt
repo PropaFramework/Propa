@@ -9,9 +9,9 @@ import org.w3c.dom.Node
 external val attachTo: dynamic = definedExternally
 fun attachTo(target: Element, vnode: VNode): VNode = attachTo.default(target, vnode)
 
-open class AttachData {
-  var placeholder: dynamic = undefined
-  var real: Node? = undefined
+external interface AttachData {
+  var placeholder: dynamic
+  var real: Node?
 }
 
 operator fun AttachData.get(key: String): dynamic = this._get(key)

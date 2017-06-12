@@ -6,7 +6,7 @@ package io.propa.framework.external.snabbdom
 external val classModule_ext: dynamic = definedExternally
 val classModule: Module = classModule_ext.default
 
-open class Classes
+external interface Classes
 
 operator fun Classes.get(key: String): Boolean = this._get(key)
 operator fun Classes.set(key: String, value: Boolean) { this._set(key, value) }

@@ -5,6 +5,7 @@ import io.propa.framework.core.PropaComponent
 import io.propa.framework.core.PropaComponentManager
 import io.propa.framework.core.PropaComponentRenderer
 import io.propa.framework.core.createInstance
+import io.propa.framework.dom.PropaDomBuilder
 import io.propa.framework.kxhtml.removeAllChildren
 import org.w3c.dom.get
 import kotlin.browser.document
@@ -18,14 +19,11 @@ object Propa {
 
   inline fun<reified T: PropaComponent> entryComponent(component: PropaComponentRenderer<T>){
     val componentInstance = component.createInstance()
-    val propaDom = PropaComponentManager.renderer.startPropa(componentInstance)
 
     try {
-      val propaApp = document.getElementsByTagName("propa-app")
-      with(propaApp[0]!!) {
-        removeAllChildren()
-        append(propaDom)
-      }
+      val propaApp = document.getElementsByTagName("propa-app")[0]
+      propaApp!!.removeAllChildren()
+      PropaDomBuilder.startPropa(propaApp, componentInstance)
     } catch (e: Exception){
       throwPropaException("No propa-app element defined.")
     }
