@@ -46,4 +46,15 @@ open class PropaDomElement(val selector: String){
     children[children.size] = this
   }
 
+  fun addChild(sel: String, block: PropaDomElement.() -> Unit){
+    val child = PropaDomElement(sel)
+    child.block()
+    child.finalize()
+    children[children.size] = child.vnode
+  }
+
+  fun finalize() {
+    vnode = h(selector, vnodeData, children)
+  }
+
 }
