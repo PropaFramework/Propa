@@ -47,10 +47,3 @@ fun <T> assertSafeCast(obj: Any): T{
   @Suppress("UNCHECKED_CAST")
   return obj as T
 }
-
-fun Node.removeAllChildren() {
-  val _this = this
-  js("while (_this.firstChild) { "+
-      "  _this.removeChild(_this.firstChild);"+
-      "}")
-}

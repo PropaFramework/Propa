@@ -1,9 +1,11 @@
 package io.propa.framework
 
+import io.propa.framework.common.removeAllChildren
 import io.propa.framework.common.throwPropaException
-import io.propa.framework.core.*
+import io.propa.framework.component.PropaComponent
+import io.propa.framework.component.PropaComponentBuilder
+import io.propa.framework.component.createInstance
 import io.propa.framework.dom.PropaDomBuilder
-import io.propa.framework.kxhtml.removeAllChildren
 import org.w3c.dom.get
 import kotlin.browser.document
 

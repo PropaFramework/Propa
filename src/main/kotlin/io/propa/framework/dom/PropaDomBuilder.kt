@@ -1,8 +1,7 @@
 package io.propa.framework.dom
 
-import io.propa.framework.core.PropaComponent
-import io.propa.framework.core.PropaComponentBuilder
-import io.propa.framework.core.createInstance
+import io.propa.framework.component.PropaComponent
+import io.propa.framework.component.PropaComponentManager
 import io.propa.framework.external.snabbdom.*
 import org.w3c.dom.Element
 
@@ -22,7 +21,9 @@ object PropaDomBuilder{
   }
 
   fun buildComponent(component: PropaComponent){
+    PropaComponentManager.tree.startComponent(component)
     build(component, { template() })
+    PropaComponentManager.tree.finishComponent(component)
   }
 
   fun buildTag(selector: String, block: PropaDomElement.() -> Unit){

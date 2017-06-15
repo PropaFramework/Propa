@@ -1,4 +1,4 @@
-import io.propa.framework.core.*
+import io.propa.framework.component.*
 import io.propa.framework.di.PropaInject
 import io.propa.framework.di.PropaService
 import io.propa.framework.dom.div
@@ -12,11 +12,11 @@ class LastComponent: PropaComponent(){
 
   val service by PropaInject<TestService>()
 
-  var detect by PropaDetect<String?>(null)
+//  var detect by PropaDetect<String?>(null)
 
   override fun template() {
     div {
-      detect = ""
+//      detect = ""
       +"NO styles"
       div {
         +"styles"

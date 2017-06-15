@@ -1,4 +1,4 @@
-package io.propa.framework.core
+package io.propa.framework.component
 
 import io.propa.framework.common.camelToDashCase
 import io.propa.framework.common.createInstance
@@ -10,6 +10,8 @@ import io.propa.framework.dom.PropaDomElement
 /**
  * Created by gbaldeck on 4/21/2017.
  */
+private val CSS_REGEX = Regex("""((?:[^{}"']|'[^']*'|"[^"]*")+)((?:[\s\n]|\/\*(?:(?!\*\/)[\s\S])*\*\/)*{(?:[^{}"']|\/\*(?:(?!\*\/)[\s\S])*\*\/|'[^']*'|"[^"]*")*})""")
+
 abstract class PropaComponent: PropaDomElement() {
   val propaId: String = PropaComponentManager.generatePropaId()
   internal var treeNode: PropaComponentTreeNode? = null
@@ -56,20 +58,10 @@ inline fun <reified T : PropaComponent> PropaComponentBuilder<T>.createInstance(
   return component
 }
 
-fun PropaComponent.getAttributes(): Map<String, String> {
-  val attributes = linkedMapOf<String, String>()
-
-  attributes["propaId"] = this.propaId
-//  this.classes?.let { attributes["class"] = it.trim() }
-  this.attributes.forEach { (key, value) -> attributes[key.trim()] = value.trim() }
-
-  return attributes
-}
-
 
 fun PropaComponent.generateStyleAndScope(){
   if(styleCompiled == null) {
-    styleCompiled = this.style?.replace(CssRegex(), {
+    styleCompiled = this.style?.replace(CSS_REGEX, {
       result ->
       val (selectors, rules) = result.destructured
       recursiveApplyCssAttr(selectors)+rules
@@ -111,9 +103,4 @@ fun PropaComponent.recursiveApplyCssAttr(selectorsStr: String, delimiters: Mutab
   }
 
   return returnStr
-}
-
-object CssRegex{
-  private val regex = Regex("""((?:[^{}"']|'[^']*'|"[^"]*")+)((?:[\s\n]|\/\*(?:(?!\*\/)[\s\S])*\*\/)*{(?:[^{}"']|\/\*(?:(?!\*\/)[\s\S])*\*\/|'[^']*'|"[^"]*")*})""")
-  operator fun invoke() = regex
 }
