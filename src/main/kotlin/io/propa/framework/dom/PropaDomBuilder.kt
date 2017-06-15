@@ -1,6 +1,8 @@
 package io.propa.framework.dom
 
 import io.propa.framework.core.PropaComponent
+import io.propa.framework.core.PropaComponentBuilder
+import io.propa.framework.core.createInstance
 import io.propa.framework.external.snabbdom.*
 import org.w3c.dom.Element
 
@@ -11,10 +13,30 @@ object PropaDomBuilder{
   lateinit var patch: Patch
   private set
 
-  lateinit private var currentVnode: VNode
+  private var currentElem: PropaDomElement? = null
 
   fun startPropa(rootElement: Element, component: PropaComponent){
     patch = Snabbdom.init(arrayOf(classModule, attributesModule, propsModule, styleModule, eventListenersModule, datasetModule))
-    component
+    buildComponent(component)
+    patch(rootElement, component.vnode)
+  }
+
+  fun buildComponent(component: PropaComponent){
+    build(component, { template() })
+  }
+
+  fun buildTag(selector: String, block: PropaDomElement.() -> Unit){
+    build(PropaDomElement(selector), block)
+  }
+
+  private fun <T: PropaDomElement> build(elem: T, block: T.() -> Unit){
+    val previousElem = currentElem
+    currentElem = elem
+    elem.block()
+    elem.vnode = h(elem.selector, elem.vnodeData, elem.children)
+    previousElem?.let {
+      it.children[it.children.size] = elem.vnode
+      currentElem = it
+    }
   }
 }

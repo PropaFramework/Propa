@@ -1,24 +1,24 @@
 import io.propa.framework.core.*
 import io.propa.framework.di.PropaInject
 import io.propa.framework.di.PropaService
+import io.propa.framework.dom.div
 import io.propa.framework.external.require
-import kotlinx.html.div
 
 /**
  * Created by gbaldeck on 5/5/2017.
  */
 class LastComponent: PropaComponent(){
-  companion object: PropaComponentRenderer<LastComponent>
+  companion object: PropaComponentBuilder<LastComponent>
 
   val service by PropaInject<TestService>()
 
   var detect by PropaDetect<String?>(null)
 
-  override fun template(): PropaTemplate = {
-    div("") {
+  override fun template() {
+    div {
       detect = ""
       +"NO styles"
-      div("test") {
+      div {
         +"styles"
         div {
           +service.test
@@ -29,7 +29,7 @@ class LastComponent: PropaComponent(){
 }
 
 class TestComponent: PropaComponent() {
-  companion object: PropaComponentRenderer<TestComponent>
+  companion object: PropaComponentBuilder<TestComponent>
 
   var setMe: String? = null
   
@@ -37,9 +37,9 @@ class TestComponent: PropaComponent() {
 
   override var style: String? = require("resources/styles/test.css")
 
-  override var classes: String? = "red"
+//  override var classes: String? = "red"
 
-  override fun template(): PropaTemplate =  {
+  override fun template() {
     div {
       +"Hells to the yeah"
     }
@@ -49,14 +49,15 @@ class TestComponent: PropaComponent() {
 }
 
 class OtherTestComponent: PropaComponent() {
-  companion object: PropaComponentRenderer<OtherTestComponent>
+  companion object: PropaComponentBuilder<OtherTestComponent>
 
   override var style: String? = require("resources/styles/test.css")
 
-  override fun template(): PropaTemplate =  {
-      TestComponent{ classes = "test"; inheritStyle = false}
+  override fun template() {
+      TestComponent{ //classes = "test";
+        inheritStyle = false}
       TestComponent {
-        classes = "test"
+//        classes = "test"
         setMe = "Other test component"
         inheritStyle = true
       }

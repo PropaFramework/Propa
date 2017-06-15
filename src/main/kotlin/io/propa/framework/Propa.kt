@@ -1,10 +1,7 @@
 package io.propa.framework
 
 import io.propa.framework.common.throwPropaException
-import io.propa.framework.core.PropaComponent
-import io.propa.framework.core.PropaComponentManager
-import io.propa.framework.core.PropaComponentRenderer
-import io.propa.framework.core.createInstance
+import io.propa.framework.core.*
 import io.propa.framework.dom.PropaDomBuilder
 import io.propa.framework.kxhtml.removeAllChildren
 import org.w3c.dom.get
@@ -17,7 +14,7 @@ object Propa {
 
   //todo: Make an infix function that sets the PropaComponentManager.componentsInheritStyle property
 
-  inline fun<reified T: PropaComponent> entryComponent(component: PropaComponentRenderer<T>){
+  inline fun<reified T: PropaComponent> entryComponent(component: PropaComponentBuilder<T>){
     val componentInstance = component.createInstance()
 
     try {
@@ -34,7 +31,7 @@ object Propa {
 
 object with
 object withWrapper {
-  inline infix fun<reified T: PropaComponent> component(component: PropaComponentRenderer<T>){
+  inline infix fun<reified T: PropaComponent> component(component: PropaComponentBuilder<T>){
     Propa.entryComponent(component)
   }
 }

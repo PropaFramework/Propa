@@ -2,6 +2,7 @@ package io.propa.framework.common
 
 import io.propa.framework.external.snabbdom._get
 import io.propa.framework.external.snabbdom._set
+import org.w3c.dom.Node
 import kotlin.reflect.KProperty
 
 /**
@@ -45,4 +46,11 @@ class DelegateProperty(val backingObj: Any, val propertyName: String? = null){
 fun <T> assertSafeCast(obj: Any): T{
   @Suppress("UNCHECKED_CAST")
   return obj as T
+}
+
+fun Node.removeAllChildren() {
+  val _this = this
+  js("while (_this.firstChild) { "+
+      "  _this.removeChild(_this.firstChild);"+
+      "}")
 }

@@ -7,10 +7,15 @@ import io.propa.framework.external.snabbdom.*
 /**
  * Created by gbaldeck on 6/5/2017.
  */
-open class PropaDomElement(val selector: String){
-  protected lateinit var vnode: VNode
-  protected var vnodeData: VNodeData = assertSafeCast(Any())
+open class PropaDomElement(){
+  lateinit var selector: String
+  lateinit var vnode: VNode
+  var vnodeData: VNodeData = assertSafeCast(Any())
   val children: Array<dynamic /* VNode | String */> = arrayOf()
+
+  constructor(selector: String): this() {
+    this.selector = selector
+  }
 
   init {
     vnodeData.hero = assertSafeCast(Any())
@@ -44,17 +49,6 @@ open class PropaDomElement(val selector: String){
 
   operator fun String.unaryPlus(){
     children[children.size] = this
-  }
-
-  fun addChild(sel: String, block: PropaDomElement.() -> Unit){
-    val child = PropaDomElement(sel)
-    child.block()
-    child.finalize()
-    children[children.size] = child.vnode
-  }
-
-  fun finalize() {
-    vnode = h(selector, vnodeData, children)
   }
 
 }
