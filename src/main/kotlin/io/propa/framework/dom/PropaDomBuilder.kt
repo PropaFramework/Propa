@@ -48,4 +48,10 @@ object PropaDomBuilder {
       document.head?.appendChild(style)
     }
   }
+
+  operator fun String.unaryPlus(){
+    currentElem?.apply {
+      children[children.size] = this@unaryPlus
+    }
+  }
 }
