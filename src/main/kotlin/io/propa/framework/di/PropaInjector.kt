@@ -7,24 +7,18 @@ import kotlin.reflect.KProperty
 /**
  * Created by gbaldeck on 5/11/2017.
  */
-object PropaInject {
-  val singletons = mutableMapOf<String, PropaService>()
-
-  inline operator fun <reified T : PropaService> invoke(): PropaDelegateInjector<T> {
-    if (T::class.simpleName == null)
-      throwPropaException("A PropaService cannot be an anonymous object or class.")
-
-    if (!singletons.contains(T::class.simpleName))
-      singletons[T::class.simpleName!!] = T::class.createInstance()
-
-    return PropaDelegateInjector<T>(singletons[T::class.simpleName] as T)
-  }
-}
-
 interface PropaService
 
-class PropaDelegateInjector<out T : PropaService>(val service: T) {
-  operator fun getValue(thisRef: Any?, property: KProperty<*>): T {
-    return service
-  }
+val PropaSingletons = mutableMapOf<String, PropaService>()
+
+class PropaInject{
+  inline operator fun <reified T: PropaService> getValue(thisRef: Any, property: KProperty<*>): T =
+    T::class.simpleName?.let {
+
+      if (!PropaSingletons.contains(T::class.simpleName))
+        PropaSingletons[it] = T::class.createInstance()
+
+      PropaSingletons[it] as T
+
+    } ?: throwPropaException("A PropaService cannot be an anonymous object or class.")
 }

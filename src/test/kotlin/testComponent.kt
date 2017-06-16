@@ -1,6 +1,9 @@
-import io.propa.framework.component.*
+import io.propa.framework.component.PropaComponent
+import io.propa.framework.component.PropaComponentBuilder
+import io.propa.framework.component.invoke
 import io.propa.framework.di.PropaInject
 import io.propa.framework.di.PropaService
+import io.propa.framework.dom.PropaTemplate
 import io.propa.framework.dom.div
 import io.propa.framework.external.require
 
@@ -10,11 +13,11 @@ import io.propa.framework.external.require
 class LastComponent: PropaComponent(){
   companion object: PropaComponentBuilder<LastComponent>
 
-  val service by PropaInject<TestService>()
+  val service: TestService by PropaInject()
 
 //  var detect by PropaDetect<String?>(null)
 
-  override fun template() {
+  override fun template(): PropaTemplate = {
     div {
 //      detect = ""
       +"NO styles"
@@ -35,11 +38,11 @@ class TestComponent: PropaComponent() {
   
   val jsConstructor = this::class.js
 
-  override var style: String? = require("resources/styles/test.css")
+  override var stylesheet: String? = require("resources/styles/test.css")
 
 //  override var classes: String? = "red"
 
-  override fun template() {
+  override fun template():PropaTemplate = {
     div {
       +"Hells to the yeah"
     }
@@ -48,12 +51,12 @@ class TestComponent: PropaComponent() {
   }
 }
 
-class OtherTestComponent: PropaComponent() {
-  companion object: PropaComponentBuilder<OtherTestComponent>
+class EntryComponent: PropaComponent() {
+  companion object: PropaComponentBuilder<EntryComponent>
 
-  override var style: String? = require("resources/styles/test.css")
+  override var stylesheet: String? = require("resources/styles/test.css")
 
-  override fun template() {
+  override fun template(): PropaTemplate = {
       TestComponent{ //classes = "test";
         inheritStyle = false}
       TestComponent {

@@ -1,14 +1,14 @@
 package io.propa.framework.dom
 
-import io.propa.framework.common.DelegateProperty
 import io.propa.framework.common.assertSafeCast
+import io.propa.framework.common.PropaDelegateProperty
 import io.propa.framework.external.snabbdom.*
 
 /**
  * Created by gbaldeck on 6/5/2017.
  */
 open class PropaDomElement(){
-  lateinit var selector: String
+  open lateinit var selector: String
   lateinit var vnode: VNode
   var vnodeData: VNodeData = assertSafeCast(Any())
   val children: Array<dynamic /* VNode | String */> = arrayOf()
@@ -33,19 +33,19 @@ open class PropaDomElement(){
     vnodeData.key = undefined
   }
   
-  val hero: Hero? by DelegateProperty(vnodeData)
-  val attachData: AttachData? by DelegateProperty(vnodeData)
-  val hook: Hooks? by DelegateProperty(vnodeData)
-  var ns: String? by DelegateProperty(vnodeData)
-  var fn: (() -> VNode)? by DelegateProperty(vnodeData)
-  val args: Array<dynamic>? by DelegateProperty(vnodeData)
-  val props: Props? by DelegateProperty(vnodeData)
-  val attrs: Attrs? by DelegateProperty(vnodeData)
-  val classes: Classes? by DelegateProperty(vnodeData, "class")
-  val styles: VNodeStyle? by DelegateProperty(vnodeData, "style")
-  val dataset: Dataset? by DelegateProperty(vnodeData)
-  val on: On? by DelegateProperty(vnodeData)
-  var key: dynamic by DelegateProperty(vnodeData)
+  val hero: Hero? by PropaDelegateProperty(vnodeData)
+  val attachData: AttachData? by PropaDelegateProperty(vnodeData)
+  val hook: Hooks? by PropaDelegateProperty(vnodeData)
+  var ns: String? by PropaDelegateProperty(vnodeData)
+  var fn: (() -> VNode)? by PropaDelegateProperty(vnodeData)
+  val args: Array<dynamic>? by PropaDelegateProperty(vnodeData)
+  val props: Props? by PropaDelegateProperty(vnodeData)
+  val attrs: Attrs? by PropaDelegateProperty(vnodeData)
+  val classes: Classes? by PropaDelegateProperty(vnodeData, "class")
+  val styles: VNodeStyle? by PropaDelegateProperty(vnodeData, "style")
+  val dataset: Dataset? by PropaDelegateProperty(vnodeData)
+  val on: On? by PropaDelegateProperty(vnodeData)
+  var key: dynamic by PropaDelegateProperty(vnodeData)
 
   operator fun String.unaryPlus(){
     children[children.size] = this

@@ -3,269 +3,269 @@ package io.propa.framework.dom
 /**
  * Created by gbaldeck on 6/13/2017.
  */
-fun PropaDomElement.a(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("a", block)
+fun PropaDomBuilder.a(block: PropaTemplate) = buildTag("a", block)
 
-fun PropaDomElement.abbr(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("abbr", block)
+fun PropaDomBuilder.abbr(block: PropaTemplate) = buildTag("abbr", block)
 
-fun PropaDomElement.address(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("address", block)
+fun PropaDomBuilder.address(block: PropaTemplate) = buildTag("address", block)
 
-fun PropaDomElement.area(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("area", block)
+fun PropaDomBuilder.area(block: PropaTemplate) = buildTag("area", block)
 
-fun PropaDomElement.article(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("article", block)
+fun PropaDomBuilder.article(block: PropaTemplate) = buildTag("article", block)
 
-fun PropaDomElement.aside(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("aside", block)
+fun PropaDomBuilder.aside(block: PropaTemplate) = buildTag("aside", block)
 
-fun PropaDomElement.audio(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("audio", block)
+fun PropaDomBuilder.audio(block: PropaTemplate) = buildTag("audio", block)
 
-fun PropaDomElement.b(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("b", block)
+fun PropaDomBuilder.b(block: PropaTemplate) = buildTag("b", block)
 
-fun PropaDomElement.base(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("base", block)
+fun PropaDomBuilder.base(block: PropaTemplate) = buildTag("base", block)
 
-fun PropaDomElement.bdi(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("bdi", block)
+fun PropaDomBuilder.bdi(block: PropaTemplate) = buildTag("bdi", block)
 
-fun PropaDomElement.bdo(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("bdo", block)
+fun PropaDomBuilder.bdo(block: PropaTemplate) = buildTag("bdo", block)
 
-fun PropaDomElement.big(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("big", block)
+fun PropaDomBuilder.big(block: PropaTemplate) = buildTag("big", block)
 
-fun PropaDomElement.blockquote(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("blockquote", block)
+fun PropaDomBuilder.blockquote(block: PropaTemplate) = buildTag("blockquote", block)
 
-fun PropaDomElement.body(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("body", block)
+fun PropaDomBuilder.body(block: PropaTemplate) = buildTag("body", block)
 
-fun PropaDomElement.br(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("br", block)
+fun PropaDomBuilder.br(block: PropaTemplate) = buildTag("br", block)
 
-fun PropaDomElement.button(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("button", block)
+fun PropaDomBuilder.button(block: PropaTemplate) = buildTag("button", block)
 
-fun PropaDomElement.canvas(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("canvas", block)
+fun PropaDomBuilder.canvas(block: PropaTemplate) = buildTag("canvas", block)
 
-fun PropaDomElement.caption(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("caption", block)
+fun PropaDomBuilder.caption(block: PropaTemplate) = buildTag("caption", block)
 
-fun PropaDomElement.cite(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("cite", block)
+fun PropaDomBuilder.cite(block: PropaTemplate) = buildTag("cite", block)
 
-fun PropaDomElement.code(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("code", block)
+fun PropaDomBuilder.code(block: PropaTemplate) = buildTag("code", block)
 
-fun PropaDomElement.col(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("col", block)
+fun PropaDomBuilder.col(block: PropaTemplate) = buildTag("col", block)
 
-fun PropaDomElement.colgroup(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("colgroup", block)
+fun PropaDomBuilder.colgroup(block: PropaTemplate) = buildTag("colgroup", block)
 
-fun PropaDomElement.data(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("data", block)
+fun PropaDomBuilder.data(block: PropaTemplate) = buildTag("data", block)
 
-fun PropaDomElement.datalist(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("datalist", block)
+fun PropaDomBuilder.datalist(block: PropaTemplate) = buildTag("datalist", block)
 
-fun PropaDomElement.dd(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("dd", block)
+fun PropaDomBuilder.dd(block: PropaTemplate) = buildTag("dd", block)
 
-fun PropaDomElement.del(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("del", block)
+fun PropaDomBuilder.del(block: PropaTemplate) = buildTag("del", block)
 
-fun PropaDomElement.details(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("details", block)
+fun PropaDomBuilder.details(block: PropaTemplate) = buildTag("details", block)
 
-fun PropaDomElement.dfn(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("dfn", block)
+fun PropaDomBuilder.dfn(block: PropaTemplate) = buildTag("dfn", block)
 
-fun PropaDomElement.dialog(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("dialog", block)
+fun PropaDomBuilder.dialog(block: PropaTemplate) = buildTag("dialog", block)
 
-fun PropaDomElement.div(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("div", block)
+fun PropaDomBuilder.div(block: PropaTemplate) = buildTag("div", block)
 
-fun PropaDomElement.dl(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("dl", block)
+fun PropaDomBuilder.dl(block: PropaTemplate) = buildTag("dl", block)
 
-fun PropaDomElement.dt(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("dt", block)
+fun PropaDomBuilder.dt(block: PropaTemplate) = buildTag("dt", block)
 
-fun PropaDomElement.em(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("em", block)
+fun PropaDomBuilder.em(block: PropaTemplate) = buildTag("em", block)
 
-fun PropaDomElement.embed(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("embed", block)
+fun PropaDomBuilder.embed(block: PropaTemplate) = buildTag("embed", block)
 
-fun PropaDomElement.fieldset(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("fieldset", block)
+fun PropaDomBuilder.fieldset(block: PropaTemplate) = buildTag("fieldset", block)
 
-fun PropaDomElement.figcaption(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("figcaption", block)
+fun PropaDomBuilder.figcaption(block: PropaTemplate) = buildTag("figcaption", block)
 
-fun PropaDomElement.figure(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("figure", block)
+fun PropaDomBuilder.figure(block: PropaTemplate) = buildTag("figure", block)
 
-fun PropaDomElement.footer(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("footer", block)
+fun PropaDomBuilder.footer(block: PropaTemplate) = buildTag("footer", block)
 
-fun PropaDomElement.form(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("form", block)
+fun PropaDomBuilder.form(block: PropaTemplate) = buildTag("form", block)
 
-fun PropaDomElement.h1(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("h1", block)
+fun PropaDomBuilder.h1(block: PropaTemplate) = buildTag("h1", block)
 
-fun PropaDomElement.h2(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("h2", block)
+fun PropaDomBuilder.h2(block: PropaTemplate) = buildTag("h2", block)
 
-fun PropaDomElement.h3(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("h3", block)
+fun PropaDomBuilder.h3(block: PropaTemplate) = buildTag("h3", block)
 
-fun PropaDomElement.h4(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("h4", block)
+fun PropaDomBuilder.h4(block: PropaTemplate) = buildTag("h4", block)
 
-fun PropaDomElement.h5(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("h5", block)
+fun PropaDomBuilder.h5(block: PropaTemplate) = buildTag("h5", block)
 
-fun PropaDomElement.h6(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("h6", block)
+fun PropaDomBuilder.h6(block: PropaTemplate) = buildTag("h6", block)
 
-fun PropaDomElement.head(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("head", block)
+fun PropaDomBuilder.head(block: PropaTemplate) = buildTag("head", block)
 
-fun PropaDomElement.header(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("header", block)
+fun PropaDomBuilder.header(block: PropaTemplate) = buildTag("header", block)
 
-fun PropaDomElement.hgroup(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("hgroup", block)
+fun PropaDomBuilder.hgroup(block: PropaTemplate) = buildTag("hgroup", block)
 
-fun PropaDomElement.hr(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("hr", block)
+fun PropaDomBuilder.hr(block: PropaTemplate) = buildTag("hr", block)
 
-fun PropaDomElement.html(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("html", block)
+fun PropaDomBuilder.html(block: PropaTemplate) = buildTag("html", block)
 
-fun PropaDomElement.i(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("i", block)
+fun PropaDomBuilder.i(block: PropaTemplate) = buildTag("i", block)
 
-fun PropaDomElement.iframe(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("iframe", block)
+fun PropaDomBuilder.iframe(block: PropaTemplate) = buildTag("iframe", block)
 
-fun PropaDomElement.img(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("img", block)
+fun PropaDomBuilder.img(block: PropaTemplate) = buildTag("img", block)
 
-fun PropaDomElement.input(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("input", block)
+fun PropaDomBuilder.input(block: PropaTemplate) = buildTag("input", block)
 
-fun PropaDomElement.ins(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("ins", block)
+fun PropaDomBuilder.ins(block: PropaTemplate) = buildTag("ins", block)
 
-fun PropaDomElement.kbd(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("kbd", block)
+fun PropaDomBuilder.kbd(block: PropaTemplate) = buildTag("kbd", block)
 
-fun PropaDomElement.keygen(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("keygen", block)
+fun PropaDomBuilder.keygen(block: PropaTemplate) = buildTag("keygen", block)
 
-fun PropaDomElement.label(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("label", block)
+fun PropaDomBuilder.label(block: PropaTemplate) = buildTag("label", block)
 
-fun PropaDomElement.legend(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("legend", block)
+fun PropaDomBuilder.legend(block: PropaTemplate) = buildTag("legend", block)
 
-fun PropaDomElement.li(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("li", block)
+fun PropaDomBuilder.li(block: PropaTemplate) = buildTag("li", block)
 
-fun PropaDomElement.link(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("link", block)
+fun PropaDomBuilder.link(block: PropaTemplate) = buildTag("link", block)
 
-fun PropaDomElement.main(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("main", block)
+fun PropaDomBuilder.main(block: PropaTemplate) = buildTag("main", block)
 
-fun PropaDomElement.map(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("map", block)
+fun PropaDomBuilder.map(block: PropaTemplate) = buildTag("map", block)
 
-fun PropaDomElement.mark(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("mark", block)
+fun PropaDomBuilder.mark(block: PropaTemplate) = buildTag("mark", block)
 
-fun PropaDomElement.menu(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("menu", block)
+fun PropaDomBuilder.menu(block: PropaTemplate) = buildTag("menu", block)
 
-fun PropaDomElement.menuitem(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("menuitem", block)
+fun PropaDomBuilder.menuitem(block: PropaTemplate) = buildTag("menuitem", block)
 
-fun PropaDomElement.meta(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("meta", block)
+fun PropaDomBuilder.meta(block: PropaTemplate) = buildTag("meta", block)
 
-fun PropaDomElement.meter(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("meter", block)
+fun PropaDomBuilder.meter(block: PropaTemplate) = buildTag("meter", block)
 
-fun PropaDomElement.nav(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("nav", block)
+fun PropaDomBuilder.nav(block: PropaTemplate) = buildTag("nav", block)
 
-fun PropaDomElement.noscript(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("noscript", block)
+fun PropaDomBuilder.noscript(block: PropaTemplate) = buildTag("noscript", block)
 
-fun PropaDomElement.objectTag(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("objectTag", block)
+fun PropaDomBuilder.objectTag(block: PropaTemplate) = buildTag("objectTag", block)
 
-fun PropaDomElement.ol(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("ol", block)
+fun PropaDomBuilder.ol(block: PropaTemplate) = buildTag("ol", block)
 
-fun PropaDomElement.optgroup(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("optgroup", block)
+fun PropaDomBuilder.optgroup(block: PropaTemplate) = buildTag("optgroup", block)
 
-fun PropaDomElement.option(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("option", block)
+fun PropaDomBuilder.option(block: PropaTemplate) = buildTag("option", block)
 
-fun PropaDomElement.output(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("output", block)
+fun PropaDomBuilder.output(block: PropaTemplate) = buildTag("output", block)
 
-fun PropaDomElement.p(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("p", block)
+fun PropaDomBuilder.p(block: PropaTemplate) = buildTag("p", block)
 
-fun PropaDomElement.param(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("param", block)
+fun PropaDomBuilder.param(block: PropaTemplate) = buildTag("param", block)
 
-fun PropaDomElement.picture(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("picture", block)
+fun PropaDomBuilder.picture(block: PropaTemplate) = buildTag("picture", block)
 
-fun PropaDomElement.pre(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("pre", block)
+fun PropaDomBuilder.pre(block: PropaTemplate) = buildTag("pre", block)
 
-fun PropaDomElement.progress(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("progress", block)
+fun PropaDomBuilder.progress(block: PropaTemplate) = buildTag("progress", block)
 
-fun PropaDomElement.q(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("q", block)
+fun PropaDomBuilder.q(block: PropaTemplate) = buildTag("q", block)
 
-fun PropaDomElement.rp(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("rp", block)
+fun PropaDomBuilder.rp(block: PropaTemplate) = buildTag("rp", block)
 
-fun PropaDomElement.rt(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("rt", block)
+fun PropaDomBuilder.rt(block: PropaTemplate) = buildTag("rt", block)
 
-fun PropaDomElement.ruby(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("ruby", block)
+fun PropaDomBuilder.ruby(block: PropaTemplate) = buildTag("ruby", block)
 
-fun PropaDomElement.s(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("s", block)
+fun PropaDomBuilder.s(block: PropaTemplate) = buildTag("s", block)
 
-fun PropaDomElement.samp(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("samp", block)
+fun PropaDomBuilder.samp(block: PropaTemplate) = buildTag("samp", block)
 
-fun PropaDomElement.script(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("script", block)
+fun PropaDomBuilder.script(block: PropaTemplate) = buildTag("script", block)
 
-fun PropaDomElement.section(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("section", block)
+fun PropaDomBuilder.section(block: PropaTemplate) = buildTag("section", block)
 
-fun PropaDomElement.select(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("select", block)
+fun PropaDomBuilder.select(block: PropaTemplate) = buildTag("select", block)
 
-fun PropaDomElement.small(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("small", block)
+fun PropaDomBuilder.small(block: PropaTemplate) = buildTag("small", block)
 
-fun PropaDomElement.source(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("source", block)
+fun PropaDomBuilder.source(block: PropaTemplate) = buildTag("source", block)
 
-fun PropaDomElement.span(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("span", block)
+fun PropaDomBuilder.span(block: PropaTemplate) = buildTag("span", block)
 
-fun PropaDomElement.strong(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("strong", block)
+fun PropaDomBuilder.strong(block: PropaTemplate) = buildTag("strong", block)
 
-fun PropaDomElement.style(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("style", block)
+fun PropaDomBuilder.style(block: PropaTemplate) = buildTag("style", block)
 
-fun PropaDomElement.sub(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("sub", block)
+fun PropaDomBuilder.sub(block: PropaTemplate) = buildTag("sub", block)
 
-fun PropaDomElement.summary(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("summary", block)
+fun PropaDomBuilder.summary(block: PropaTemplate) = buildTag("summary", block)
 
-fun PropaDomElement.sup(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("sup", block)
+fun PropaDomBuilder.sup(block: PropaTemplate) = buildTag("sup", block)
 
-fun PropaDomElement.table(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("table", block)
+fun PropaDomBuilder.table(block: PropaTemplate) = buildTag("table", block)
 
-fun PropaDomElement.tbody(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("tbody", block)
+fun PropaDomBuilder.tbody(block: PropaTemplate) = buildTag("tbody", block)
 
-fun PropaDomElement.td(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("td", block)
+fun PropaDomBuilder.td(block: PropaTemplate) = buildTag("td", block)
 
-fun PropaDomElement.textarea(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("textarea", block)
+fun PropaDomBuilder.textarea(block: PropaTemplate) = buildTag("textarea", block)
 
-fun PropaDomElement.tfoot(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("tfoot", block)
+fun PropaDomBuilder.tfoot(block: PropaTemplate) = buildTag("tfoot", block)
 
-fun PropaDomElement.th(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("th", block)
+fun PropaDomBuilder.th(block: PropaTemplate) = buildTag("th", block)
 
-fun PropaDomElement.thead(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("thead", block)
+fun PropaDomBuilder.thead(block: PropaTemplate) = buildTag("thead", block)
 
-fun PropaDomElement.time(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("time", block)
+fun PropaDomBuilder.time(block: PropaTemplate) = buildTag("time", block)
 
-fun PropaDomElement.title(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("title", block)
+fun PropaDomBuilder.title(block: PropaTemplate) = buildTag("title", block)
 
-fun PropaDomElement.tr(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("tr", block)
+fun PropaDomBuilder.tr(block: PropaTemplate) = buildTag("tr", block)
 
-fun PropaDomElement.track(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("track", block)
+fun PropaDomBuilder.track(block: PropaTemplate) = buildTag("track", block)
 
-fun PropaDomElement.u(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("u", block)
+fun PropaDomBuilder.u(block: PropaTemplate) = buildTag("u", block)
 
-fun PropaDomElement.ul(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("ul", block)
+fun PropaDomBuilder.ul(block: PropaTemplate) = buildTag("ul", block)
 
-fun PropaDomElement.variable(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("variable", block)
+fun PropaDomBuilder.variable(block: PropaTemplate) = buildTag("variable", block)
 
-fun PropaDomElement.video(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("video", block)
+fun PropaDomBuilder.video(block: PropaTemplate) = buildTag("video", block)
 
-fun PropaDomElement.wbr(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("wbr", block)
+fun PropaDomBuilder.wbr(block: PropaTemplate) = buildTag("wbr", block)
 
 // SVG
-fun PropaDomElement.svg(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("svg", block)
+fun PropaDomBuilder.svg(block: PropaTemplate) = buildTag("svg", block)
 
-fun PropaDomElement.circle(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("circle", block)
+fun PropaDomBuilder.circle(block: PropaTemplate) = buildTag("circle", block)
 
-fun PropaDomElement.defs(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("defs", block)
+fun PropaDomBuilder.defs(block: PropaTemplate) = buildTag("defs", block)
 
-fun PropaDomElement.ellipse(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("ellipse", block)
+fun PropaDomBuilder.ellipse(block: PropaTemplate) = buildTag("ellipse", block)
 
-fun PropaDomElement.g(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("g", block)
+fun PropaDomBuilder.g(block: PropaTemplate) = buildTag("g", block)
 
-fun PropaDomElement.image(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("image", block)
+fun PropaDomBuilder.image(block: PropaTemplate) = buildTag("image", block)
 
-fun PropaDomElement.line(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("line", block)
+fun PropaDomBuilder.line(block: PropaTemplate) = buildTag("line", block)
 
-fun PropaDomElement.linearGradient(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("linearGradient", block)
+fun PropaDomBuilder.linearGradient(block: PropaTemplate) = buildTag("linearGradient", block)
 
-fun PropaDomElement.mask(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("mask", block)
+fun PropaDomBuilder.mask(block: PropaTemplate) = buildTag("mask", block)
 
-fun PropaDomElement.path(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("path", block)
+fun PropaDomBuilder.path(block: PropaTemplate) = buildTag("path", block)
 
-fun PropaDomElement.pattern(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("pattern", block)
+fun PropaDomBuilder.pattern(block: PropaTemplate) = buildTag("pattern", block)
 
-fun PropaDomElement.polygon(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("polygon", block)
+fun PropaDomBuilder.polygon(block: PropaTemplate) = buildTag("polygon", block)
 
-fun PropaDomElement.polyline(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("polyline", block)
+fun PropaDomBuilder.polyline(block: PropaTemplate) = buildTag("polyline", block)
 
-fun PropaDomElement.radialGradient(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("radialGradient", block)
+fun PropaDomBuilder.radialGradient(block: PropaTemplate) = buildTag("radialGradient", block)
 
-fun PropaDomElement.rect(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("rect", block)
+fun PropaDomBuilder.rect(block: PropaTemplate) = buildTag("rect", block)
 
-fun PropaDomElement.stop(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("stop", block)
+fun PropaDomBuilder.stop(block: PropaTemplate) = buildTag("stop", block)
 
-fun PropaDomElement.symbol(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("symbol", block)
+fun PropaDomBuilder.symbol(block: PropaTemplate) = buildTag("symbol", block)
 
-fun PropaDomElement.text(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("text", block)
+fun PropaDomBuilder.text(block: PropaTemplate) = buildTag("text", block)
 
-fun PropaDomElement.tspan(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("tspan", block)
+fun PropaDomBuilder.tspan(block: PropaTemplate) = buildTag("tspan", block)
 
-fun PropaDomElement.use(block: PropaDomElement.() -> Unit) = PropaDomBuilder.buildTag("use", block)
+fun PropaDomBuilder.use(block: PropaTemplate) = buildTag("use", block)

@@ -1,11 +1,12 @@
 package io.propa.framework.component
 
+import io.propa.framework.common.PropaAssignOnce
 import io.propa.framework.common.camelToDashCase
 import io.propa.framework.common.createInstance
 import io.propa.framework.common.getProperTagName
-import io.propa.framework.common.throwPropaException
 import io.propa.framework.dom.PropaDomBuilder
 import io.propa.framework.dom.PropaDomElement
+import io.propa.framework.dom.PropaTemplate
 
 /**
  * Created by gbaldeck on 4/21/2017.
@@ -13,29 +14,36 @@ import io.propa.framework.dom.PropaDomElement
 
 abstract class PropaComponent: PropaDomElement() {
   val propaId: String = PropaComponentManager.generatePropaId()
-  internal var treeNode: PropaComponentTreeNode? = null
-    get() = field ?: throwPropaException("The component '${getComponentTagName()}' has no corresponding tree node.")
 
-  open var tagName: String = "" //the get() of this should only be used in getComponentTagName()
-    protected set
+  override var selector: String = ""
+    get() {
+      if (field.trim() == "") {
+        field = tagName
+        return field
+      }
+      return field.getProperTagName()
+    }
 
-  open var style: String? = null
+  var tagName: String = ""
+    get() {
+      if (field.trim() == "")
+        field = this::class.simpleName!!.camelToDashCase()
 
-  internal var styleCompiled: String? = null
+      return field.getProperTagName()
+    }
 
+  open var stylesheet: String? = null
   open var inheritStyle: Boolean = PropaComponentManager.componentsInheritStyle
 
+  internal val stylesheetId: String
+    get() = propaId+"-stylesheet"
+  internal var stylesheetCompiled: String? = null
   internal val scopeAttributes = mutableMapOf<String, String>() //for use in giving the css scope to each element in the template
+  internal var treeNode: PropaComponentTreeNode
+      by PropaAssignOnce("The component '$tagName' has no corresponding tree node.")
 
-  abstract fun template()
+  abstract fun template(): PropaTemplate
 }
-
-fun PropaComponent.getComponentTagName(): String =
-    if (this.tagName.trim() == "")
-      this::class.simpleName!!.camelToDashCase()
-    else
-      this.tagName.getProperTagName()
-
 
 interface PropaComponentBuilder<T : PropaComponent>
 
@@ -52,8 +60,8 @@ inline fun <reified T : PropaComponent> PropaComponentBuilder<T>.createInstance(
 
 
 fun PropaComponent.generateStyleAndScope(){
-  if(styleCompiled == null) {
-    styleCompiled = this.style?.replace(CSS_REGEX, {
+  if(stylesheetCompiled == null) {
+    stylesheetCompiled = this.stylesheet?.replace(CSS_REGEX, {
       result ->
       val (selectors, rules) = result.destructured
       recursiveApplyCssAttr(selectors)+rules
@@ -64,16 +72,14 @@ fun PropaComponent.generateStyleAndScope(){
 
 fun recursiveInheritedStyleScope(component: PropaComponent,
                                  scopeAttributes: MutableMap<String, String> = component.scopeAttributes){
-  if(component.treeNode == null)
-    throwPropaException("A tree node has not been generated for this component.")
 
   scopeAttributes[component.propaId] = ""
 
-  val treeNode = component.treeNode!!
-  if(treeNode.parent == null || !component.inheritStyle)
-    return
-
-  recursiveInheritedStyleScope(treeNode.parent.component, scopeAttributes)
+  if(component.inheritStyle) {
+    component.treeNode.parent?.let {
+      recursiveInheritedStyleScope(it.component, scopeAttributes)
+    }
+  }
 }
 
 fun PropaComponent.recursiveApplyCssAttr(selectorsStr: String, delimiters: MutableList<String> = mutableListOf(" ",",",">","+","~")): String{
