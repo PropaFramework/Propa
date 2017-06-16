@@ -10,17 +10,11 @@ import io.propa.framework.dom.PropaDomElement
 /**
  * Created by gbaldeck on 4/21/2017.
  */
-private val CSS_REGEX = Regex("""((?:[^{}"']|'[^']*'|"[^"]*")+)((?:[\s\n]|\/\*(?:(?!\*\/)[\s\S])*\*\/)*{(?:[^{}"']|\/\*(?:(?!\*\/)[\s\S])*\*\/|'[^']*'|"[^"]*")*})""")
 
 abstract class PropaComponent: PropaDomElement() {
   val propaId: String = PropaComponentManager.generatePropaId()
   internal var treeNode: PropaComponentTreeNode? = null
-    get() {
-      if(field == null)
-        throwPropaException("The component '${getComponentTagName()}' has no corresponding tree node.")
-
-      return field
-    }
+    get() = field ?: throwPropaException("The component '${getComponentTagName()}' has no corresponding tree node.")
 
   open var tagName: String = "" //the get() of this should only be used in getComponentTagName()
     protected set
@@ -30,8 +24,6 @@ abstract class PropaComponent: PropaDomElement() {
   internal var styleCompiled: String? = null
 
   open var inheritStyle: Boolean = PropaComponentManager.componentsInheritStyle
-
-  open val attributes: Map<String, String> = mutableMapOf()
 
   internal val scopeAttributes = mutableMapOf<String, String>() //for use in giving the css scope to each element in the template
 
@@ -104,3 +96,5 @@ fun PropaComponent.recursiveApplyCssAttr(selectorsStr: String, delimiters: Mutab
 
   return returnStr
 }
+
+private val CSS_REGEX = Regex("""((?:[^{}"']|'[^']*'|"[^"]*")+)((?:[\s\n]|\/\*(?:(?!\*\/)[\s\S])*\*\/)*{(?:[^{}"']|\/\*(?:(?!\*\/)[\s\S])*\*\/|'[^']*'|"[^"]*")*})""")
