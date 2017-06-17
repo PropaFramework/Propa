@@ -6,6 +6,7 @@ import io.propa.framework.di.PropaService
 import io.propa.framework.dom.PropaTemplate
 import io.propa.framework.dom.div
 import io.propa.framework.external.require
+import io.propa.framework.snabbdom.plusAssign
 
 /**
  * Created by gbaldeck on 5/5/2017.
@@ -40,7 +41,9 @@ class TestComponent: PropaComponent() {
 
   override var stylesheet: String? = require("resources/styles/test.css")
 
-//  override var classes: String? = "red"
+  init {
+    classes += "red"
+  }
 
   override fun template():PropaTemplate = {
     div {
@@ -57,10 +60,10 @@ class EntryComponent: PropaComponent() {
   override var stylesheet: String? = require("resources/styles/test.css")
 
   override fun template(): PropaTemplate = {
-      TestComponent{ //classes = "test";
+      TestComponent{ classes += "test";
         inheritStyle = false}
       TestComponent {
-//        classes = "test"
+        classes += "test"
         setMe = "Other test component"
         inheritStyle = true
       }

@@ -7,6 +7,17 @@ import io.propa.framework.common.getProperTagName
 import io.propa.framework.dom.PropaDomBuilder
 import io.propa.framework.dom.PropaDomElement
 import io.propa.framework.dom.PropaTemplate
+import io.propa.framework.external.snabbdom.set
+import kotlin.collections.MutableList
+import kotlin.collections.MutableMap
+import kotlin.collections.component1
+import kotlin.collections.component2
+import kotlin.collections.forEach
+import kotlin.collections.last
+import kotlin.collections.mutableListOf
+import kotlin.collections.mutableMapOf
+import kotlin.collections.set
+import kotlin.collections.toTypedArray
 
 /**
  * Created by gbaldeck on 4/21/2017.
@@ -15,16 +26,7 @@ import io.propa.framework.dom.PropaTemplate
 abstract class PropaComponent: PropaDomElement() {
   val propaId: String = PropaComponentManager.generatePropaId()
 
-  override var selector: String = ""
-    get() {
-      if (field.trim() == "") {
-        field = tagName
-        return field
-      }
-      return field.getProperTagName()
-    }
-
-  var tagName: String = ""
+  final override var selector: String = ""
     get() {
       if (field.trim() == "")
         field = this::class.simpleName!!.camelToDashCase()
@@ -40,7 +42,7 @@ abstract class PropaComponent: PropaDomElement() {
   internal var stylesheetCompiled: String? = null
   internal val scopeAttributes = mutableMapOf<String, String>() //for use in giving the css scope to each element in the template
   internal var treeNode: PropaComponentTreeNode
-      by PropaAssignOnce("The component '$tagName' has no corresponding tree node.")
+      by PropaAssignOnce("The component '$selector' has no corresponding tree node.")
 
   abstract fun template(): PropaTemplate
 }
@@ -68,11 +70,11 @@ fun PropaComponent.generateStyleAndScope(){
     })
   }
   recursiveInheritedStyleScope(this)
+  applyAttributes(*scopeAttributes.toList().toTypedArray())
 }
 
-fun recursiveInheritedStyleScope(component: PropaComponent,
-                                 scopeAttributes: MutableMap<String, String> = component.scopeAttributes){
-
+private fun recursiveInheritedStyleScope(component: PropaComponent,
+                                         scopeAttributes: MutableMap<String, String> = component.scopeAttributes){
   scopeAttributes[component.propaId] = ""
 
   if(component.inheritStyle) {
@@ -82,7 +84,7 @@ fun recursiveInheritedStyleScope(component: PropaComponent,
   }
 }
 
-fun PropaComponent.recursiveApplyCssAttr(selectorsStr: String, delimiters: MutableList<String> = mutableListOf(" ",",",">","+","~")): String{
+private fun PropaComponent.recursiveApplyCssAttr(selectorsStr: String, delimiters: MutableList<String> = mutableListOf(" ",",",">","+","~")): String{
   if(delimiters.isEmpty())
     return "$selectorsStr[$propaId]"
 

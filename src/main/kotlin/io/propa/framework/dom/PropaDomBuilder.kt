@@ -24,7 +24,9 @@ object PropaDomBuilder {
   }
 
   fun buildTag(selector: String, block: PropaTemplate) {
-    build(PropaDomElement(selector), block)
+    val elem = PropaDomElement(selector)
+    elem.applyAttributes(*PropaComponentManager.tree.currentNode.component.scopeAttributes.toList().toTypedArray())
+    build(elem, block)
   }
 
   private fun <T : PropaDomElement> build(elem: T, block: PropaTemplate) {

@@ -1,7 +1,7 @@
 package io.propa.framework.dom
 
-import io.propa.framework.common.assertSafeCast
 import io.propa.framework.common.PropaDelegateProperty
+import io.propa.framework.common.assertSafeCast
 import io.propa.framework.external.snabbdom.*
 
 /**
@@ -9,9 +9,9 @@ import io.propa.framework.external.snabbdom.*
  */
 open class PropaDomElement(){
   open lateinit var selector: String
-  lateinit var vnode: VNode
-  var vnodeData: VNodeData = assertSafeCast(Any())
-  val children: Array<dynamic /* VNode | String */> = arrayOf()
+  open lateinit var vnode: VNode
+  open var vnodeData: VNodeData = assertSafeCast(Any())
+  open val children: Array<dynamic /* VNode | String */> = arrayOf()
 
   constructor(selector: String): this() {
     this.selector = selector
@@ -33,22 +33,37 @@ open class PropaDomElement(){
     vnodeData.key = undefined
   }
   
-  val hero: Hero? by PropaDelegateProperty(vnodeData)
-  val attachData: AttachData? by PropaDelegateProperty(vnodeData)
-  val hook: Hooks? by PropaDelegateProperty(vnodeData)
+  val hero: Hero by PropaDelegateProperty(vnodeData)
+  val attachData: AttachData by PropaDelegateProperty(vnodeData)
+  val hook: Hooks by PropaDelegateProperty(vnodeData)
   var ns: String? by PropaDelegateProperty(vnodeData)
   var fn: (() -> VNode)? by PropaDelegateProperty(vnodeData)
-  val args: Array<dynamic>? by PropaDelegateProperty(vnodeData)
-  val props: Props? by PropaDelegateProperty(vnodeData)
-  val attrs: Attrs? by PropaDelegateProperty(vnodeData)
-  val classes: Classes? by PropaDelegateProperty(vnodeData, "class")
-  val styles: VNodeStyle? by PropaDelegateProperty(vnodeData, "style")
-  val dataset: Dataset? by PropaDelegateProperty(vnodeData)
-  val on: On? by PropaDelegateProperty(vnodeData)
+  val args: Array<dynamic> by PropaDelegateProperty(vnodeData)
+  val props: Props by PropaDelegateProperty(vnodeData)
+  val attrs: Attrs by PropaDelegateProperty(vnodeData)
+  val classes: Classes by PropaDelegateProperty(vnodeData, "class")
+  val styles: VNodeStyle by PropaDelegateProperty(vnodeData, "style")
+  val dataset: Dataset by PropaDelegateProperty(vnodeData)
+  val on: On by PropaDelegateProperty(vnodeData)
   var key: dynamic by PropaDelegateProperty(vnodeData)
 
-  operator fun String.unaryPlus(){
-    children[children.size] = this
+  fun applyAttributes(vararg attrs: Pair<String, String>){
+    _applyAttrs(attrs)
   }
 
+  fun applyAttributes(vararg attrs: Pair<String, Number>){
+    _applyAttrs(attrs)
+  }
+
+  fun applyAttributes(vararg attrs: Pair<String, Boolean>){
+    _applyAttrs(attrs)
+  }
+
+  private fun _applyAttrs(pairs: Array<out Pair<String, dynamic>>){
+    val _attrs: dynamic = attrs
+    pairs.forEach {
+      (key, value) ->
+      _attrs[key] = value
+    }
+  }
 }
