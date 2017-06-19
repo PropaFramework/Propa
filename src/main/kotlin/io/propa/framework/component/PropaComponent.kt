@@ -7,7 +7,7 @@ import io.propa.framework.common.getProperTagName
 import io.propa.framework.dom.PropaDomBuilder
 import io.propa.framework.dom.PropaDomElement
 import io.propa.framework.dom.PropaTemplate
-import io.propa.framework.external.snabbdom.set
+import com.github.snabbdom.set
 import kotlin.collections.MutableList
 import kotlin.collections.MutableMap
 import kotlin.collections.component1

@@ -2,7 +2,7 @@ package io.propa.framework.dom
 
 import io.propa.framework.common.PropaDelegateProperty
 import io.propa.framework.common.assertSafeCast
-import io.propa.framework.external.snabbdom.*
+import com.github.snabbdom.*
 
 /**
  * Created by gbaldeck on 6/5/2017.

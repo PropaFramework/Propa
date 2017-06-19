@@ -1,7 +1,7 @@
 package io.propa.framework.common
 
-import io.propa.framework.external.snabbdom._get
-import io.propa.framework.external.snabbdom._set
+import com.github.snabbdom._get
+import com.github.snabbdom._set
 import kotlin.reflect.KProperty
 
 /**

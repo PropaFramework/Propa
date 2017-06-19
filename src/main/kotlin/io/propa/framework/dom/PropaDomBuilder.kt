@@ -3,7 +3,7 @@ package io.propa.framework.dom
 import io.propa.framework.component.PropaComponent
 import io.propa.framework.component.PropaComponentManager
 import io.propa.framework.component.generateStyleAndScope
-import io.propa.framework.external.snabbdom.*
+import com.github.snabbdom.*
 import org.w3c.dom.Element
 import kotlin.browser.document
 

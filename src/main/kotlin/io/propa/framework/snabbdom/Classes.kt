@@ -1,7 +1,7 @@
 package io.propa.framework.snabbdom
 
-import io.propa.framework.external.snabbdom.Classes
-import io.propa.framework.external.snabbdom.set
+import com.github.snabbdom.Classes
+import com.github.snabbdom.set
 
 /**
  * Created by gbaldeck on 6/17/2017.
