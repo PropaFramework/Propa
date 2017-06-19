@@ -1,8 +1,8 @@
 package io.propa.framework.dom
 
+import com.github.snabbdom.*
 import io.propa.framework.common.PropaDelegateProperty
 import io.propa.framework.common.assertSafeCast
-import com.github.snabbdom.*
 
 /**
  * Created by gbaldeck on 6/5/2017.
@@ -32,20 +32,22 @@ open class PropaDomElement(){
     vnodeData.on = assertSafeCast(Any())
     vnodeData.key = undefined
   }
+
+  private val _getVnodeData = { vnodeData }
   
-  val hero: Hero by PropaDelegateProperty(vnodeData)
-  val attachData: AttachData by PropaDelegateProperty(vnodeData)
-  val hook: Hooks by PropaDelegateProperty(vnodeData)
-  var ns: String? by PropaDelegateProperty(vnodeData)
-  var fn: (() -> VNode)? by PropaDelegateProperty(vnodeData)
-  val args: Array<dynamic> by PropaDelegateProperty(vnodeData)
-  val props: Props by PropaDelegateProperty(vnodeData)
-  val attrs: Attrs by PropaDelegateProperty(vnodeData)
-  val classes: Classes by PropaDelegateProperty(vnodeData, "class")
-  val styles: VNodeStyle by PropaDelegateProperty(vnodeData, "style")
-  val dataset: Dataset by PropaDelegateProperty(vnodeData)
-  val on: On by PropaDelegateProperty(vnodeData)
-  var key: dynamic by PropaDelegateProperty(vnodeData)
+  val hero: Hero by PropaDelegateProperty(_getVnodeData)
+  val attachData: AttachData by PropaDelegateProperty(_getVnodeData)
+  val hook: Hooks by PropaDelegateProperty(_getVnodeData)
+  var ns: String? by PropaDelegateProperty(_getVnodeData)
+  var fn: (() -> VNode)? by PropaDelegateProperty(_getVnodeData)
+  val args: Array<dynamic> by PropaDelegateProperty(_getVnodeData)
+  val props: Props by PropaDelegateProperty(_getVnodeData)
+  val attrs: Attrs by PropaDelegateProperty(_getVnodeData)
+  val classes: Classes by PropaDelegateProperty(_getVnodeData, "class")
+  val styles: VNodeStyle by PropaDelegateProperty(_getVnodeData, "style")
+  val dataset: Dataset by PropaDelegateProperty(_getVnodeData)
+  val on: On by PropaDelegateProperty(_getVnodeData)
+  var key: dynamic by PropaDelegateProperty(_getVnodeData)
 
   fun applyAttributes(vararg attrs: Pair<String, String>){
     _applyAttrs(attrs)
@@ -65,5 +67,18 @@ open class PropaDomElement(){
       (key, value) ->
       _attrs[key] = value
     }
+  }
+
+  fun deleteAttributes(vararg keys: String){
+
+    val _attrs: dynamic = attrs
+    keys.forEach {
+      key ->
+      _attrs[key] = undefined
+    }
+
+    val _vnodeData: dynamic = vnodeData
+    val newAttrs: dynamic = Any()
+
   }
 }

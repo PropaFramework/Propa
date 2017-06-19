@@ -69,6 +69,9 @@ fun PropaComponent.generateStyleAndScope(){
       recursiveApplyCssAttr(selectors)+rules
     })
   }
+  if(scopeAttributes.isNotEmpty())
+    deleteAttributes(*scopeAttributes.keys.toTypedArray())
+
   recursiveInheritedStyleScope(this)
   applyAttributes(*scopeAttributes.toList().toTypedArray())
 }

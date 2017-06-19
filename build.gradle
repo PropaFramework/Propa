@@ -85,8 +85,6 @@ jar {
 
 if(project.gradle.startParameter.taskNames.contains("jar")){
     compileKotlin2Js.dependsOn 'cleanJar'
-} else if(project.gradle.startParameter.taskNames.contains("run")) {
-    compileKotlin2Js.dependsOn 'cleanJs'
 }
 
 task cleanJar {

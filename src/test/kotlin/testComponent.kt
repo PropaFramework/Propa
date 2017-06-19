@@ -20,11 +20,14 @@ class LastComponent: PropaComponent(){
 
   override fun template(): PropaTemplate = {
     div {
+      classes += "this"
 //      detect = ""
       +"NO styles"
       div {
+        classes += "is"
         +"styles"
         div {
+          classes += "cool"
           +service.test
         }
       }
@@ -47,6 +50,7 @@ class TestComponent: PropaComponent() {
 
   override fun template():PropaTemplate = {
     div {
+      classes += "awesome"
       +"Hells to the yeah"
     }
     setMe?.let { div { +it } }
@@ -58,6 +62,10 @@ class EntryComponent: PropaComponent() {
   companion object: PropaComponentBuilder<EntryComponent>
 
   override var stylesheet: String? = require("resources/styles/test.css")
+
+  init {
+    classes += "hello"
+  }
 
   override fun template(): PropaTemplate = {
       TestComponent{ classes += "test";

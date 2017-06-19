@@ -1,10 +1,11 @@
 package io.propa.framework.dom
 
+import com.github.snabbdom.*
+import io.propa.framework.common.PropaDelegateProperty
+import io.propa.framework.common.throwPropaException
 import io.propa.framework.component.PropaComponent
 import io.propa.framework.component.PropaComponentManager
 import io.propa.framework.component.generateStyleAndScope
-import com.github.snabbdom.*
-import org.w3c.dom.Element
 import kotlin.browser.document
 
 /**
@@ -56,4 +57,21 @@ object PropaDomBuilder {
       children[children.size] = this@unaryPlus
     }
   }
+
+  private val getCurrentElemVnodeData = { currentElem?.vnodeData ?:
+      throwPropaException("There is currently no element to get the vnodeData object from.") }
+
+  val hero: Hero by PropaDelegateProperty(getCurrentElemVnodeData)
+  val attachData: AttachData by PropaDelegateProperty(getCurrentElemVnodeData)
+  val hook: Hooks by PropaDelegateProperty(getCurrentElemVnodeData)
+  var ns: String? by PropaDelegateProperty(getCurrentElemVnodeData)
+  var fn: (() -> VNode)? by PropaDelegateProperty(getCurrentElemVnodeData)
+  val args: Array<dynamic> by PropaDelegateProperty(getCurrentElemVnodeData)
+  val props: Props by PropaDelegateProperty(getCurrentElemVnodeData)
+  val attrs: Attrs by PropaDelegateProperty(getCurrentElemVnodeData)
+  val classes: Classes by PropaDelegateProperty(getCurrentElemVnodeData, "class")
+  val styles: VNodeStyle by PropaDelegateProperty(getCurrentElemVnodeData, "style")
+  val dataset: Dataset by PropaDelegateProperty(getCurrentElemVnodeData)
+  val on: On by PropaDelegateProperty(getCurrentElemVnodeData)
+  var key: dynamic by PropaDelegateProperty(getCurrentElemVnodeData)
 }
