@@ -7,17 +7,7 @@ import io.propa.framework.common.getProperTagName
 import io.propa.framework.dom.PropaDomBuilder
 import io.propa.framework.dom.PropaDomElement
 import io.propa.framework.dom.PropaTemplate
-import com.github.snabbdom.set
-import kotlin.collections.MutableList
-import kotlin.collections.MutableMap
-import kotlin.collections.component1
-import kotlin.collections.component2
-import kotlin.collections.forEach
-import kotlin.collections.last
-import kotlin.collections.mutableListOf
-import kotlin.collections.mutableMapOf
 import kotlin.collections.set
-import kotlin.collections.toTypedArray
 
 /**
  * Created by gbaldeck on 4/21/2017.
@@ -69,8 +59,6 @@ fun PropaComponent.generateStyleAndScope(){
       recursiveApplyCssAttr(selectors)+rules
     })
   }
-  if(scopeAttributes.isNotEmpty())
-    deleteAttributes(*scopeAttributes.keys.toTypedArray())
 
   recursiveInheritedStyleScope(this)
   applyAttributes(*scopeAttributes.toList().toTypedArray())
