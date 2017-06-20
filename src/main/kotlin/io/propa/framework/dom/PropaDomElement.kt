@@ -1,6 +1,7 @@
 package io.propa.framework.dom
 
 import com.github.snabbdom.*
+import io.propa.framework.common.PropaConstant
 import io.propa.framework.common.PropaDelegateProperty
 import io.propa.framework.common.assertSafeCast
 
@@ -70,15 +71,20 @@ open class PropaDomElement(){
   }
 
   fun deleteAttributes(vararg keys: String){
-
     val _attrs: dynamic = attrs
     keys.forEach {
       key ->
-      _attrs[key] = undefined
+      _attrs[key] = PropaConstant.DELETE
+    }
+
+    val newAttrs: dynamic = Any()
+    val attrKeys = _attrs.keys() as Array<String>
+    attrKeys.forEach {
+      if(_attrs[key] !== PropaConstant.DELETE)
+        newAttrs[key] = _attrs[key]
     }
 
     val _vnodeData: dynamic = vnodeData
-    val newAttrs: dynamic = Any()
-
+    _vnodeData.attrs = newAttrs
   }
 }
