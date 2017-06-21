@@ -80,6 +80,7 @@ open class PropaDomElement(){
     val newAttrs: dynamic = Any()
     val attrKeys = _attrs.keys() as Array<String>
     attrKeys.forEach {
+      key ->
       if(_attrs[key] !== PropaConstant.DELETE)
         newAttrs[key] = _attrs[key]
     }
